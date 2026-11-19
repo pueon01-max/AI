@@ -2,9 +2,9 @@
    Replaces each kit's own tab row with: 손예진 포트폴리오 · 01 Luckin · 02 Spoany · 03 Matter Lab */
 (function () {
   var CASES = [
-    ["luckin", "01 Luckin Campaign", "luckin-campaign"],
-    ["spoany", "02 Spoany Studio", "spoany"],
-    ["matter-lab", "03 Matter Lab", "matter"]
+    ["spoany", "01 Spoany Studio", "spoany"],
+    ["matter-lab", "02 Matter Lab", "matter"],
+    ["luckin", "03 Luckin Campaign", "luckin-campaign"]
   ];
   var here = location.pathname.split("/").filter(Boolean);
   var cur = "";

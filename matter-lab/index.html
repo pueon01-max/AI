@@ -48,6 +48,26 @@
   .bar-row .fill{transform:none!important}
   .cmp-range{display:none!important}
 }
+
+/* shared additions: written-out flow, journey links, tidy paragraphs */
+p{text-wrap:pretty}
+.flow-goal{color:var(--a-mute);max-width:62ch;margin:-12px 0 clamp(24px,3vw,36px)}
+.flow q{display:block;quotes:none;margin-top:14px;padding-top:12px;border-top:1px dashed var(--a-line);font:500 15px/1.4 var(--text);color:var(--a-ink);letter-spacing:-.02em}
+.fsum{margin-top:clamp(28px,4vw,44px)}
+.fsum .lbl,.feff .lbl{display:block;color:var(--a-mute);margin-bottom:14px}
+.fsum ol{display:flex;flex-wrap:wrap;gap:8px 4px;list-style:none;margin:0;padding:0;align-items:center}
+.fsum li{display:flex;align-items:baseline;gap:8px;padding:10px 16px;border-radius:999px;background:var(--a-glass);border:1px solid var(--a-gline)}
+.fsum li:not(:last-child)::after{content:"→";margin-left:10px;color:var(--a-mute)}
+.fsum b{font:500 15px var(--display);color:var(--a-hi);letter-spacing:-.01em}
+.fsum span{font-size:13px;color:var(--a-mute)}
+.feff{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:clamp(24px,3vw,36px)}
+.feff .lbl{grid-column:1/-1;margin-bottom:0}
+.feff div{padding:18px 20px;border-radius:var(--r-card);background:var(--a-glass);border:1px solid var(--a-gline)}
+.feff b{display:block;font:500 17px/1.3 var(--display);letter-spacing:-.02em}
+.feff p{font-size:14px;color:var(--a-mute);margin-top:6px;line-height:1.55}
+.show-link.jr-link{margin-top:20px}
+@media (max-width:860px){.feff{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.feff{grid-template-columns:1fr}}
 </style></head><body>
 <meta charset="utf-8">
 <title>Matter Lab · 손예진 포트폴리오</title>
@@ -673,9 +693,9 @@ function decisionVisual(d) {
   const isPhone = v.kind === "phones";
   const one = (item, alt) => isPhone ? phoneHtml(item, alt) : webHtml(item, alt, v.plain);
   const afterInner = isPhone
-    ? (v.after.length > 1 ? `<div class="shots">${v.after.map(a => one(a, "리디자인 화면")).join("")}</div>` : one(v.after[0], "리디자인 화면"))
-    : `<div class="shots-web${v.after.length > 1 && v.before ? "" : v.after.length > 1 ? " two" : ""}">${v.after.map(a => one(a, "리디자인 결과물")).join("")}</div>`;
-  if (!v.before) return `<div class="panels single"><div class="pnl after"><span class="tag">REDESIGN</span>${afterInner}</div></div>`;
+    ? (v.after.length > 1 ? `<div class="shots">${v.after.map(a => one(a, "작업 화면")).join("")}</div>` : one(v.after[0], "작업 화면"))
+    : `<div class="shots-web${v.after.length > 1 && v.before ? "" : v.after.length > 1 ? " two" : ""}">${v.after.map(a => one(a, "작업 결과물")).join("")}</div>`;
+  if (!v.before) return `<div class="panels single"><div class="pnl after"><span class="tag">OUTPUT</span>${afterInner}</div></div>`;
   const beforeInner = isPhone ? one(v.before, "기존 화면") : `<div class="shots-web">${one(v.before, "기존 결과물")}</div>`;
   const [lb, la] = v.labels || ["BEFORE", "AFTER"];
   return `<div class="panels"><div class="pnl before${v.neutral ? " neutral" : ""}"><span class="tag">${lb}</span>${beforeInner}</div><div class="pnl after${v.neutral ? " neutral" : ""}"><span class="tag">${la}</span>${afterInner}</div></div>`;
@@ -744,12 +764,18 @@ function renderCase(key) {
 
   const proc = c.process.map(([w, p], i) => `<li><span class="n">${i + 1}</span><span class="w">${w}</span><p>${p}</p></li>`).join("");
   const jn = JOURNEY[key];
-  const flowSteps = c.flow ? `<p class="flow-t">${c.flow.title}</p>
-      <ol class="flow" style="--n:${c.flow.steps.length}">${c.flow.steps.map(([h, e, p], i) => `<li><span class="s">${String(i + 1).padStart(2, "0")}</span><b>${h}</b><em>${e}</em><p>${p}</p></li>`).join("")}</ol>` : "";
+  const fl = c.flow;
+  const flowSteps = fl ? `<p class="flow-t">${fl.title}</p>${fl.goal ? `<p class="flow-goal">${fl.goal}</p>` : ""}
+      <ol class="flow" style="--n:${fl.steps.length}">${fl.steps.map(([h, e, p, q], i) => `<li><span class="s">${String(i + 1).padStart(2, "0")}</span><b>${h}</b><em>${e}</em><p>${p}</p>${q ? `<q>${q}</q>` : ""}</li>`).join("")}</ol>
+      ${fl.summary ? `<div class="fsum"><span class="lbl">흐름 요약</span><ol>${fl.summary.map(([k, v]) => `<li><b>${k}</b><span>${v}</span></li>`).join("")}</ol></div>` : ""}
+      ${fl.effects ? `<div class="feff"><span class="lbl">기대 효과</span>${fl.effects.map(([h, p]) => `<div><b>${h}</b><p>${p}</p></div>`).join("")}</div>` : ""}` : "";
   const jItem = ([src, h, p], i) => `<li>${jn.kind === "phones" ? `<div class="phone"><img src="${src}" alt="${h} 화면"></div>` : `<div class="wimg"><img src="${src}" alt="${h}"></div>`}
       <div class="cap"><i>${i + 1}</i><div><b>${h}</b><span>${p}</span></div></div></li>`;
   const journey = jn ? `<p class="jr-t">${jn.title}</p><span class="jr-hint">SCROLL →  옆으로 넘겨 보기</span><ol class="jr${jn.kind === "web" ? " jw-web" : ""}">${jn.items.map(jItem).join("")}</ol>
       ${jn.extra ? `<div class="jx"><span class="lbl">+ ${jn.extra.title}</span>${jn.extra.items.map(([src, h, p]) => `<figure><div class="phone"><img src="${src}" alt="${h} 화면"></div><figcaption><b>${h}</b><span>${p}</span></figcaption></figure>`).join("")}</div>` : ""}
+      ${jn.link ? `<a class="show-link jr-link" href="${jn.link[0]}" target="_blank" rel="noopener">${ic("arrow-out")}${jn.link[1]}</a>` : ""}
+      ${jn.site ? `<p class="jr-t">${jn.site.title}</p><ol class="jr jw-web">${jn.site.items.map(([src, h, p], i) => `<li><div class="wimg"><img src="${src}" alt="${h}"></div><div class="cap"><i>${i + 1}</i><div><b>${h}</b><span>${p}</span></div></div></li>`).join("")}</ol>
+        <a class="show-link jr-link" href="${jn.site.link[0]}" target="_blank" rel="noopener">${ic("arrow-out")}${jn.site.link[1]}</a>` : ""}
       ${jn.wide ? `<figure class="jw"><img src="${jn.wide[0]}" alt="와이어플로우"><figcaption>${jn.wide[1]}</figcaption></figure>` : ""}` : "";
   const flow = (flowSteps || journey) ? `<section class="ra room" id="ch-flow" data-ch="FLOW"><div class="wrap">${sec("User flow · Screens", "FLOW")}${flowSteps}${journey}</div></section>` : "";
 
@@ -773,7 +799,7 @@ function renderCase(key) {
       <div><div class="slider ${cp.kind === "phone" ? "phone-s" : cp.kind === "feed" ? "feed-s" : "web-s"}" id="slider" style="--pos:50%"><div class="screen">
         <img src="${cp.after}" alt="고친 뒤 결과"><img class="b" src="${cp.before}" alt="고치기 전 결과">
         <span class="t" style="left:14px">BEFORE</span><span class="t" style="right:14px">AFTER</span><span class="handle" aria-hidden="true"></span></div></div>
-      <input class="cmp-range" id="cmp-range" type="range" min="0" max="100" value="50" aria-label="기존과 리디자인 비교 위치"></div></div>${resultsHtml(c.results)}${showcaseHtml(c.showcase)}</section>` : "";
+      <input class="cmp-range" id="cmp-range" type="range" min="0" max="100" value="50" aria-label="전과 후 비교 위치"></div></div>${resultsHtml(c.results)}${showcaseHtml(c.showcase)}</section>` : "";
 
   /* intent map */
   let intent = "";
@@ -791,8 +817,8 @@ function renderCase(key) {
              : `<div class="imap"><div class="col">${L.map(card).join("")}</div>${screen}<div class="col">${R.map(card).join("")}</div></div>`}
     </div></section>`;
   }
-  const fixboard = fx ? `<section class="ra room" id="ch-what" data-ch="WHAT"><div class="wrap">${sec("Problem → Fix", "WHAT")}<h2 class="fxb-t">What I fixed</h2>
-      <p class="fxb-sub">아쉬웠던 것은 지우고, 바꾼 것은 빛나게. 개선 포인트를 한 장에 모았습니다.</p>
+  const fixboard = fx ? `<section class="ra room" id="ch-what" data-ch="WHAT"><div class="wrap">${sec("Problem → Fix", "WHAT")}<h2 class="fxb-t">What changed</h2>
+      <p class="fxb-sub">아쉬웠던 점과 바꾼 점을 한 장에 정리했습니다.</p>
       <div class="fxb">${fx.fixes.map(([icon, kw, p, f]) => `<div class="fx"><div class="ring">${ic(icon)}<b>${kw}</b></div><span class="kwm">${kw}</span>
         <div class="pill p"><i>✕</i><span>${p}</span></div><span class="arw" aria-hidden="true">→</span><div class="pill f"><i>✓</i><span>${f}</span></div></div>`).join("")}</div>
     </div></section>` : "";
@@ -807,7 +833,7 @@ function renderCase(key) {
     <div class="hv">${hero}${fx ? `<div class="chips" aria-hidden="true">${fx.fixes.slice(0, 4).map(([icon, kw], i) => `<span class="fchip c${i}">${ic(icon)}${kw}</span>`).join("")}</div>` : ""}</div>
     <div class="overview"><p class="big">${c.statement}</p>
       <div class="ov-body"><span class="lbl">[Overview]</span><p>${c.overview}</p><dl class="facts">${facts}</dl></div></div>
-    <nav class="chap" aria-label="이 케이스 스터디의 순서">${[["why", "WHY", "무엇이 문제였나"], ["what", "WHAT", "무엇을 고쳤나"], ["where", "WHERE", "화면 어디에"], ["how", "HOW", "어떻게 결정했나"], ["flow", "FLOW", "실제 화면 흐름"], ["result", "RESULT", "전과 후"], ["learn", "LEARN", "배운 점"]]
+    <nav class="chap" aria-label="이 케이스 스터디의 순서">${[["why", "WHY", "무엇이 문제였나"], ["what", "WHAT", "무엇을 바꿨나"], ["where", "WHERE", "어디에 담았나"], ["how", "HOW", "어떻게 결정했나"], ["flow", "FLOW", "실제 화면 흐름"], ["result", "RESULT", "전과 후"], ["learn", "LEARN", "과정과 회고"]]
       .filter(([id]) => id !== "result" || c.compare).filter(([id]) => id !== "flow" || c.flow || JOURNEY[key]).filter(([id]) => (id !== "what" && id !== "where") || FX[key])
       .map(([id, k, t], i) => `<button data-go="ch-${id}"><i>${i + 1}</i>${k}<span>${t}</span></button>`).join("")}</nav>
   </div></section>
