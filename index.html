@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07050d">
+<title>손예진 포트폴리오</title>
+<meta name="description" content="손예진 포트폴리오 — AI를 활용해 기획하고 만든 세 개의 케이스 스터디: Luckin Campaign · Spoany Studio · Matter Lab">
+<link rel="preload" href="assets/fonts/Pretendard-ExtraBold.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Pretendard';font-weight:300;font-display:swap;src:url('assets/fonts/Pretendard-Light.woff2') format('woff2')}
+@font-face{font-family:'Pretendard';font-weight:400;font-display:swap;src:url('assets/fonts/Pretendard-Regular.woff2') format('woff2')}
+@font-face{font-family:'Pretendard';font-weight:600;font-display:swap;src:url('assets/fonts/Pretendard-SemiBold.woff2') format('woff2')}
+@font-face{font-family:'Pretendard';font-weight:800;font-display:swap;src:url('assets/fonts/Pretendard-ExtraBold.woff2') format('woff2')}
+:root{
+  --bg:#07050d;--ink:#f6f1ff;--ink-2:#d6cde8;--ink-3:#c4b6dd;--line:#ffffff1c;
+  --violet:#9c5cff;--lav:#e8c8ff;
+  --sf:Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --pad:clamp(22px,5vw,72px);
+}
+*{box-sizing:border-box}
+html{background:var(--bg);scroll-behavior:smooth}
+body{margin:0;color:var(--ink);font-family:var(--sf);background:var(--bg);overflow-x:hidden;-webkit-font-smoothing:antialiased;word-break:keep-all}
+a{color:inherit}
+img{display:block;max-width:100%}
+body.intro-on{overflow:hidden}
+
+/* ── ambient ── */
+.aurora{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:radial-gradient(ellipse at 20% 10%,#4133a8 0,transparent 42%),radial-gradient(ellipse at 85% 24%,#8c2d9d 0,transparent 40%),linear-gradient(145deg,#05030b 0%,#180c32 46%,#09050f 100%)}
+.aurora::before,.aurora::after{content:"";position:absolute;width:130vw;height:38vw;left:-20vw;border-radius:50%;filter:blur(34px);mix-blend-mode:screen;background:linear-gradient(90deg,transparent,#496dff66 18%,#b97affaa 48%,#ff7ad777 72%,transparent);animation:wave 13s ease-in-out infinite alternate}
+.aurora::before{top:16%;transform:rotate(13deg)}
+.aurora::after{top:60%;animation-delay:-7s;transform:rotate(-10deg);opacity:.58}
+@keyframes wave{to{translate:9vw -4vw;scale:1.08}}
+.grain{position:fixed;inset:0;z-index:60;opacity:.055;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E")}
+
+.dimmer{position:fixed;inset:0;z-index:0;pointer-events:none;background:#07050d;opacity:0;transition:opacity .2s linear}
+/* ── labels ── */
+.eyebrow,.label{font:600 11px/1.3 var(--sf);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.eq{display:inline-flex;align-items:flex-end;gap:2px;height:12px}
+.eq i{width:3px;height:100%;border-radius:2px;background:currentColor;transform-origin:bottom;animation:eq .9s ease-in-out infinite alternate}
+.eq i:nth-child(2){animation-delay:-.3s;animation-duration:.7s}.eq i:nth-child(3){animation-delay:-.6s;animation-duration:1.1s}.eq i:nth-child(4){animation-delay:-.15s;animation-duration:.8s}
+@keyframes eq{0%{transform:scaleY(.25)}100%{transform:scaleY(1)}}
+
+/* ── intro ── */
+.intro{position:fixed;inset:0;z-index:50;background:#05030a;overflow:hidden;transition:opacity .9s ease,visibility .9s}
+.intro.gone{opacity:0;visibility:hidden;pointer-events:none}
+.mix-bg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.intro.no-gl .mix-bg{background:radial-gradient(circle at 50% 44%,#9c5cff66,transparent 50%),linear-gradient(160deg,#05030b,#180c32 50%,#09050f)}
+.mix-scrim{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,#07050dc4 0%,#07050d66 42%,transparent 72%),linear-gradient(0deg,#07050d88,transparent 40%)}
+.mix-grain{position:absolute;inset:0;opacity:.13;mix-blend-mode:overlay;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.mix-meta{position:absolute;z-index:3;left:var(--pad);top:clamp(26px,6vh,64px);display:grid;grid-template-columns:auto 1fr;column-gap:12px;row-gap:6px;align-items:center;opacity:0;animation:fade .7s ease .15s forwards}
+.mix-meta .eq{grid-row:span 2;height:14px;color:#fff}
+.mix-label{font:700 clamp(15px,1.5vw,19px)/1 var(--sf);letter-spacing:.06em}
+.mix-sub{grid-column:2;font:600 11px var(--sf);letter-spacing:.08em;color:#ffffffb3}
+.mix-type{position:absolute;z-index:3;left:var(--pad);right:var(--pad);top:50%;transform:translateY(-50%);margin:0;display:flex;flex-direction:column;gap:.18em;font:800 clamp(34px,5.6vw,92px)/1.12 var(--sf);letter-spacing:-.035em;text-shadow:0 2px 30px #1a0a3d55}
+.mix-line{display:block;min-height:1.12em;white-space:pre-wrap}
+.mix-line:nth-child(2){color:#ffffffd9}
+.mix-caret{display:inline-block;width:.06em;height:.92em;margin-left:.06em;vertical-align:-.1em;border-radius:2px;background:#fff;box-shadow:0 0 14px #fff9}
+.mix-caret.idle{animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.mix-foot{position:absolute;z-index:3;left:var(--pad);bottom:clamp(24px,5vh,48px);margin:0;font:600 11px var(--sf);letter-spacing:.19em;color:#ffffffa6;opacity:0;animation:fade .7s ease .4s forwards}
+.skip{position:absolute;z-index:4;right:var(--pad);bottom:clamp(20px,4.6vh,44px);border:1px solid #ffffff59;background:#ffffff1a;backdrop-filter:blur(10px);color:#fff;border-radius:99px;padding:12px 16px;font:600 11px var(--sf);letter-spacing:.12em;cursor:pointer}
+.mix-cover{position:absolute;z-index:3;left:50%;top:50%;width:min(44vmin,440px);aspect-ratio:1;border-radius:22px;overflow:hidden;opacity:0;pointer-events:none;container-type:size;transform:translate(-50%,-50%) scale(.88);box-shadow:0 40px 110px #000b,0 0 90px #8d55ff55,inset 0 0 0 1px #ffffff1f;transition:opacity .7s ease,transform 1.1s cubic-bezier(.16,1,.3,1),filter 1.1s ease}
+.mix-cover svg{position:absolute;inset:0;width:100%;height:100%}
+.mix-cover .mcw{animation:mcw 9s ease-in-out infinite alternate}
+.mix-cover .w2{animation-duration:11s;animation-delay:-3s}.mix-cover .w3{animation-duration:7s;animation-delay:-5s}
+@keyframes mcw{to{transform:translateX(-50px)}}
+.mix-cover b{position:absolute;z-index:1;left:7cqmin;top:7cqmin;font:800 11cqmin/1.04 var(--sf);letter-spacing:-.04em;text-shadow:0 2px 18px #1a0a3d55}
+.mix-cover span{position:absolute;z-index:1;bottom:6.5cqmin;font:600 clamp(8px,2.7cqmin,12px) var(--sf);letter-spacing:.18em;color:#ffffffd0}
+.mix-cover .mc-play{left:7cqmin;display:flex;align-items:center;gap:8px}
+.mix-cover .mc-play em{width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 10px #fff}
+.mix-cover .mc-by{right:7cqmin}
+.intro.cover-in .mix-cover{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.intro.cover-in .mix-type,.intro.cover-in .mix-meta,.intro.cover-in .mix-foot,.intro.cover-in .mix-scrim{transition:opacity .45s ease;opacity:0!important;animation:none}
+.intro.leaving .mix-cover{transform:translate(-50%,-50%) scale(2.6);opacity:0;filter:blur(8px)}
+@keyframes fade{to{opacity:1}}
+
+/* ── header ── */
+.site-head{position:fixed;z-index:40;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:24px 3.5vw;transition:background .4s,backdrop-filter .4s,padding .4s}
+.site-head.solid{background:#07050daa;backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);padding:14px 3.5vw;border-bottom:1px solid var(--line)}
+.logo{text-decoration:none;font:600 13px var(--sf);letter-spacing:.15em}
+.logo sup{font-size:.6em;margin-left:2px}
+.head-nav{display:flex;gap:6px}
+.head-nav a{text-decoration:none;font:600 11px var(--sf);letter-spacing:.1em;color:var(--ink-2);padding:9px 14px;border-radius:99px;border:1px solid transparent;transition:border-color .2s,color .2s,background .2s}
+.head-nav a:hover{color:#fff;border-color:#ffffff33;background:#ffffff0d}
+.head-nav a.cta{border-color:#ffffff44;color:#fff}
+
+/* ── hero ── */
+main{position:relative;z-index:1}
+.hero{position:relative;min-height:100svh;overflow:hidden;display:flex;align-items:stretch}
+.hero-copy{position:relative;z-index:5;padding:clamp(120px,19vh,180px) var(--pad) 0;max-width:640px}
+.hero-copy h1{margin:16px 0 26px;font:800 clamp(52px,7.4vw,118px)/1.02 var(--sf);letter-spacing:-.045em}
+.hero-copy h1 i{display:block;font-style:normal;color:var(--lav)}
+.hero-copy p{margin:0;font:500 17px/1.7 var(--sf);color:var(--ink-2);letter-spacing:-.01em}
+.hero-copy p + p{margin-top:14px}
+.hero-copy .lede{color:var(--ink);font-weight:600}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.hero-tags span{font:600 11px var(--sf);letter-spacing:.06em;color:var(--ink-2);padding:8px 12px;border-radius:99px;border:1px solid #ffffff26;background:#ffffff08}
+.silhouette{position:absolute;z-index:3;left:56%;bottom:0;width:min(46vw,600px);transform:translateX(-50%);pointer-events:none}
+.silhouette img{width:100%;-webkit-mask-image:linear-gradient(180deg,#000 0,#000 70%,transparent 98%);mask-image:linear-gradient(180deg,#000 0,#000 70%,transparent 98%);filter:drop-shadow(0 0 40px #a457e044)}
+.halo{position:absolute;z-index:2;left:56%;top:48%;width:min(62vw,820px);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none}
+.halo i{position:absolute;inset:0;border-radius:50%;border:1px solid #d7b8ff33;animation:ring 6s linear infinite;opacity:0}
+.halo i:nth-child(2){animation-delay:-2s}.halo i:nth-child(3){animation-delay:-4s}
+.halo::before{content:"";position:absolute;inset:18%;border-radius:50%;background:radial-gradient(circle,#9c5cff55,transparent 68%);filter:blur(30px)}
+@keyframes ring{0%{transform:scale(.35);opacity:0}20%{opacity:.9}100%{transform:scale(1.05);opacity:0}}
+
+/* now playing card */
+.np{position:absolute;z-index:6;right:var(--pad);bottom:clamp(90px,14vh,140px);width:min(320px,80vw);padding:14px;border-radius:22px;background:#140c26b3;border:1px solid #ffffff1f;backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%);box-shadow:0 30px 80px #000a;text-decoration:none;display:block;transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.np:hover{transform:translateY(-4px)}
+.np-art{position:relative;aspect-ratio:1;border-radius:14px;overflow:hidden;background:#000}
+.np-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity .8s ease,transform 1.6s ease}
+.np-art img.on{opacity:1;transform:scale(1)}
+.np-row{display:flex;align-items:center;gap:12px;margin-top:14px}
+.np-row .eq{color:var(--lav)}
+.np-txt{flex:1;min-width:0}
+.np-txt small{display:block;font:600 10px var(--sf);letter-spacing:.14em;color:var(--ink-3)}
+.np-txt b{display:block;margin-top:4px;font:700 16px/1.25 var(--sf);letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.np-no{font:600 11px var(--sf);letter-spacing:.1em;color:var(--ink-3)}
+.np-bar{height:3px;border-radius:3px;background:#ffffff1f;margin-top:12px;overflow:hidden}
+.np-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#9c5cff,#f48be7)}
+.np-bar i.run{animation:prog 4.6s linear forwards}
+@keyframes prog{to{width:100%}}
+.hint{position:absolute;z-index:6;left:50%;bottom:26px;transform:translateX(-50%);font:600 10px var(--sf);letter-spacing:.2em;color:var(--ink-3);display:flex;flex-direction:column;align-items:center;gap:10px}
+.hint i{width:1px;height:34px;background:linear-gradient(#fff8,transparent);animation:drip 2s ease-in-out infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ── sections ── */
+.sec{position:relative;z-index:1;padding:clamp(90px,14vh,150px) var(--pad)}
+.sec-head{display:grid;grid-template-columns:1fr auto;gap:18px 40px;align-items:end;margin-bottom:clamp(40px,6vw,72px)}
+.sec-head h2{margin:12px 0 0;font:800 clamp(36px,5vw,76px)/1.05 var(--sf);letter-spacing:-.04em}
+.sec-head h2 i{font-style:normal;color:var(--lav)}
+.sec-head p{margin:0;max-width:30em;font:500 16px/1.75 var(--sf);color:var(--ink-2)}
+
+/* tracklist */
+.tracks{display:flex;flex-direction:column;gap:clamp(18px,2.4vw,28px)}
+.track{--c:#9c5cff;--c2:#5d86ff;position:relative;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(22px,3.6vw,56px);align-items:center;padding:clamp(18px,2.4vw,28px);border-radius:30px;text-decoration:none;color:inherit;background:linear-gradient(140deg,#120a22d9,#0b0716e6);border:1px solid #ffffff1c;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);overflow:hidden;isolation:isolate;transition:border-color .4s,transform .6s cubic-bezier(.16,1,.3,1)}
+.track::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 80% at 0% 0%,color-mix(in srgb,var(--c) 36%,transparent),transparent 70%),radial-gradient(50% 70% at 100% 100%,color-mix(in srgb,var(--c2) 22%,transparent),transparent 70%);opacity:.55;transition:opacity .5s}
+.track:hover{border-color:color-mix(in srgb,var(--c) 55%,transparent);transform:translateY(-4px)}
+.track:hover::before{opacity:1}
+.track.rev{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)}
+.track.rev .t-media{order:2}
+.t-media{position:relative;aspect-ratio:16/10.4;border-radius:20px;overflow:hidden;background:#0b0912;box-shadow:0 30px 70px #0009}
+.t-media img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
+.track:hover .t-media img{transform:scale(1.035)}
+.t-disc{position:absolute;right:16px;bottom:16px;width:clamp(70px,9vw,104px);aspect-ratio:1;border-radius:50%;overflow:hidden;box-shadow:0 14px 40px #000b,0 0 0 1px #ffffff2a;animation:spin 9s linear infinite;animation-play-state:paused}
+.track:hover .t-disc{animation-play-state:running}
+.t-disc img{width:100%;height:100%;object-fit:cover}
+.t-disc::after{content:"";position:absolute;left:50%;top:50%;width:18%;aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);background:#0b0912;box-shadow:0 0 0 3px #ffffff40}
+@keyframes spin{to{transform:rotate(360deg)}}
+.t-info{padding:clamp(4px,1vw,14px)}
+.t-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.t-no{display:inline-flex;align-items:center;gap:8px;font:800 13px var(--sf);letter-spacing:.06em;color:#fff}.t-no::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c);box-shadow:0 0 12px var(--c)}
+.t-cat{font:600 11px var(--sf);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.t-info h3{margin:14px 0 6px;font:800 clamp(34px,4.2vw,64px)/1 var(--sf);letter-spacing:-.04em}
+.t-sub{margin:0;font:600 15px var(--sf);color:var(--ink-2)}
+.t-state{margin:22px 0 0;font:500 16px/1.75 var(--sf);color:var(--ink-2)}
+.t-state strong{color:#fff;font-weight:700}
+.t-meta{display:grid;grid-template-columns:auto 1fr;gap:9px 18px;margin:24px 0 0;padding:20px 0 0;border-top:1px solid #ffffff17;font:500 14px/1.55 var(--sf)}
+.t-meta dt{font:600 10.5px/1.9 var(--sf);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.t-meta dd{margin:0;color:var(--ink-2)}
+.t-meta dd b{color:#fff;font-weight:600}
+.t-go{display:inline-flex;align-items:center;gap:10px;margin-top:26px;padding:13px 20px;border-radius:99px;background:#fff;color:#0b0912;font:700 14px var(--sf);transition:gap .3s,background .3s}
+.track:hover .t-go{gap:16px;background:color-mix(in srgb,var(--c) 30%,#fff)}
+
+/* AI workflow */
+.ai{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.8vw,22px)}
+.ai-card{--c:#9c5cff;display:flex;flex-direction:column;border-radius:24px;padding:clamp(22px,2.4vw,30px);background:#0e0819d9;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid #ffffff17}
+.ai-card header{display:flex;align-items:center;gap:12px;padding-bottom:18px;border-bottom:1px solid #ffffff17}
+.ai-card header img{width:44px;height:44px;border-radius:10px;object-fit:cover}
+.ai-card header b{display:block;font:700 17px var(--sf);letter-spacing:-.01em}
+.ai-card header small{display:block;margin-top:3px;font:600 10.5px var(--sf);letter-spacing:.12em;color:var(--ink-3);text-transform:uppercase}
+.ai-row{padding:18px 0 0}
+.ai-row h4{margin:0 0 8px;display:flex;align-items:center;gap:8px;font:600 11px var(--sf);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.ai-row h4::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--c)}
+.ai-row.me h4::before{background:#fff}
+.ai-row p{margin:0;font:500 15px/1.7 var(--sf);color:var(--ink-2)}
+.ai-out{margin-top:auto;padding-top:22px}
+.ai-out div{border-radius:16px;padding:16px 18px;background:color-mix(in srgb,var(--c) 14%,transparent);border:1px solid color-mix(in srgb,var(--c) 34%,transparent)}
+.ai-out small{display:block;font:600 10.5px var(--sf);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.ai-out b{display:block;margin-top:6px;font:700 16px/1.45 var(--sf);letter-spacing:-.01em}
+.principle{margin-top:clamp(40px,6vw,72px);padding:clamp(30px,4vw,56px);border-radius:30px;background:linear-gradient(135deg,#2a1656e6,#120a24e6);border:1px solid #ffffff1c;display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,3vw,44px);align-items:center}
+.principle .q{font:800 clamp(60px,8vw,120px)/.8 var(--sf);color:var(--lav);opacity:.7}
+.principle blockquote{margin:0;font:700 clamp(22px,2.4vw,34px)/1.45 var(--sf);letter-spacing:-.025em}
+.principle cite{display:block;margin-top:14px;font:600 11px var(--sf);font-style:normal;letter-spacing:.14em;color:var(--ink-3)}
+
+/* contact */
+.contact{text-align:center;padding-bottom:clamp(70px,10vh,110px)}
+.contact h2{margin:16px 0 18px;font:800 clamp(46px,7vw,110px)/1 var(--sf);letter-spacing:-.045em;text-transform:uppercase}
+.contact h2 i{font-style:normal;color:var(--lav)}
+.contact p{margin:0;font:500 16px/1.7 var(--sf);color:var(--ink-2)}
+.links{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:30px}
+.links a{text-decoration:none;font:600 12px var(--sf);letter-spacing:.1em;padding:13px 20px;border-radius:99px;border:1px solid #ffffff3a;background:#ffffff0a;transition:background .2s}
+.links a:hover{background:#ffffff1c}
+.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:24px var(--pad) 32px;border-top:1px solid var(--line);font:600 11px var(--sf);letter-spacing:.12em;color:var(--ink-3);position:relative;z-index:1}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(34px);transition:opacity .9s ease,transform 1.1s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+
+@media (max-width:980px){
+  .track,.track.rev{grid-template-columns:1fr}
+  .track.rev .t-media{order:0}
+  .ai{grid-template-columns:1fr}
+  .sec-head{grid-template-columns:1fr}
+  .np{display:none}
+  .silhouette{left:50%;width:min(80vw,520px);opacity:.55}
+  .halo{left:50%;top:62%;width:110vw}
+}
+@media (max-width:600px){
+  .head-nav a:not(.cta){display:none}
+  .hero-copy p{font-size:15px}
+  .principle{grid-template-columns:1fr}
+  .mix-cover{width:70vw;border-radius:18px}
+  .mix-type{font-size:clamp(30px,9vw,44px)}
+  .mix-scrim{background:linear-gradient(0deg,#07050daa,#07050d44 55%,transparent)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body class="intro-on">
+<div class="aurora" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="dimmer" id="dimmer" aria-hidden="true"></div>
+
+<!-- INTRO -->
+<div class="intro" id="intro" role="dialog" aria-label="포트폴리오 인트로">
+  <canvas class="mix-bg" aria-hidden="true"></canvas>
+  <div class="mix-scrim" aria-hidden="true"></div>
+  <div class="mix-grain" aria-hidden="true"></div>
+  <div class="mix-meta"><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="mix-label">SON YE JIN'S MIX</span><span class="mix-sub">AI Case Studies · 3 Tracks · 2026</span></div>
+  <h1 class="mix-type" aria-label="AI와 함께 만들고, 판단은 끝까지 직접 합니다">
+    <span class="mix-line" data-text="AI와 함께 만들고," aria-hidden="true"></span>
+    <span class="mix-line" data-text="판단은 끝까지 직접 합니다" aria-hidden="true"></span>
+  </h1>
+  <p class="mix-foot" aria-hidden="true">SON YE JIN — VISUAL DESIGNER</p>
+  <div class="mix-cover" aria-hidden="true">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none"><defs><linearGradient id="mcA" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5e6cff"/><stop offset=".5" stop-color="#a596ff"/><stop offset="1" stop-color="#6f7dff"/></linearGradient><linearGradient id="mcB" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c3a8ff"/><stop offset=".5" stop-color="#7f8dff"/><stop offset="1" stop-color="#c3a8ff"/></linearGradient><linearGradient id="mcC" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4fc3dc"/><stop offset=".5" stop-color="#6fa0ff"/><stop offset="1" stop-color="#4fc3dc"/></linearGradient><filter id="mcBlur" x="-10%" y="-20%" width="120%" height="140%"><feGaussianBlur stdDeviation="3.2"/></filter><radialGradient id="mcGlow"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".35" stop-color="#d9b8ff" stop-opacity=".25"/><stop offset="1" stop-color="#9c5cff" stop-opacity="0"/></radialGradient></defs><rect width="100" height="100" fill="#141a4a"/><g filter="url(#mcBlur)"><path class="mcw w1" fill="url(#mcA)" d="M0 34 C25 22 25 46 50 34 S75 22 100 34 S125 46 150 34 S175 22 200 34 V110 H0Z"/><path class="mcw w2" fill="url(#mcB)" d="M0 52 C25 40 25 64 50 52 S75 40 100 52 S125 64 150 52 S175 40 200 52 V110 H0Z"/><path class="mcw w3" fill="url(#mcC)" d="M0 68 C25 58 25 80 50 68 S75 58 100 68 S125 80 150 68 S175 58 200 68 V110 H0Z"/><path class="mcw w4" fill="#0e1236" d="M0 84 C25 76 25 92 50 84 S75 76 100 84 S125 92 150 84 S175 76 200 84 V110 H0Z"/></g><circle cx="74" cy="26" r="18" fill="url(#mcGlow)"/></svg>
+    <b>손예진<br>포트폴리오</b>
+    <span class="mc-play"><em></em>NOW PLAYING</span><span class="mc-by">3 TRACKS</span>
+  </div>
+  <button class="skip" id="skip" type="button">SKIP INTRO</button>
+</div>
+
+<header class="site-head" id="head">
+  <a class="logo" href="#top">SON YE JIN<sup>®</sup></a>
+  <nav class="head-nav" aria-label="페이지 이동"><a href="#works">WORKS</a><a href="#ai">HOW I WORK</a><a class="cta" href="#contact">CONTACT ↗</a></nav>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero" aria-label="소개">
+    <div class="halo" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="silhouette" aria-hidden="true"><img src="assets/silhouette.webp" alt=""></div>
+    <div class="hero-copy">
+      <span class="eyebrow">SON YE JIN · VISUAL DESIGNER · PORTFOLIO 2026</span>
+      <h1>손예진<i>포트폴리오</i></h1>
+      <p class="lede">익숙한 것을 낯설게 듣고,<br>음악처럼 오래 남는 경험을 만드는 디자이너입니다.</p>
+      <p>AI를 활용해 기획하고, 직접 만들고, 현장에서 써 보며 다듬은<br>세 개의 작업을 한곳에 모았습니다.</p>
+      <div class="hero-tags" aria-label="수록 작업"><span>01 Luckin Campaign</span><span>02 Spoany Studio</span><span>03 Matter Lab</span></div>
+    </div>
+    <a class="np" id="np" href="#works" aria-label="지금 재생 중인 작업으로 이동">
+      <div class="np-art" id="np-art">
+        <img src="assets/covers/luckin.webp" alt="" class="on">
+        <img src="assets/covers/spoany.webp" alt="">
+        <img src="assets/covers/matter.webp" alt="">
+      </div>
+      <div class="np-row"><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="np-txt"><small>NOW PLAYING</small><b id="np-t">Luckin Campaign</b></span><span class="np-no" id="np-n">01 / 03</span></div>
+      <div class="np-bar"><i id="np-bar"></i></div>
+    </a>
+    <div class="hint" aria-hidden="true">SCROLL TO EXPLORE<i></i></div>
+  </section>
+
+  <!-- WORKS -->
+  <section class="sec" id="works" aria-label="작업">
+    <div class="sec-head rv">
+      <div><span class="eyebrow">SIDE A · TRACKLIST</span><h2>AI와 함께 만든<br><i>세 개의 트랙</i></h2></div>
+      <p>각 작업은 문제를 발견한 계기부터 결정, 결과, 회고까지 케이스 스터디로 정리했습니다. 카드를 누르면 자세한 제작기로 이어집니다.</p>
+    </div>
+
+    <div class="tracks">
+      <a class="track rv" href="luckin/" style="--c:#2f5bff;--c2:#7fa0ff">
+        <div class="t-media"><img src="luckin/img/hq/camp-web-hero.jpg" alt="루이싱 커피 Brew Your Luck 캠페인 웹사이트 첫 화면" loading="lazy"><span class="t-disc"><img src="assets/covers/luckin.webp" alt=""></span></div>
+        <div class="t-info">
+          <div class="t-top"><span class="t-no">TRACK 01</span><span class="t-cat">Global Campaign · Promotion Web</span></div>
+          <h3>Brew your luck.</h3>
+          <p class="t-sub">Luckin Coffee — 캠페인 웹사이트 · QR 브루잉 웹</p>
+          <p class="t-state">루이싱이 한국에 온다면, 처음 받는 공짜 커피를 <strong>행운</strong>으로. 지하철 포스터의 QR에서 시작해 도시별 캠페인 웹사이트와 브루잉 웹까지 이어지는 프로모션을 기획했습니다.</p>
+          <dl class="t-meta">
+            <dt>Role</dt><dd>기획 · 리서치 · 디자인 · <b>AI 활용 구현</b></dd>
+            <dt>AI</dt><dd>ChatGPT · Midjourney로 매장·도시·지하철 비주얼 생성</dd>
+            <dt>Period</dt><dd>2026.05 – 06</dd>
+          </dl>
+          <span class="t-go">케이스 스터디 보기 →</span>
+        </div>
+      </a>
+
+      <a class="track rev rv" href="spoany/" style="--c:#ec054a;--c2:#ff5c8a">
+        <div class="t-media"><img src="spoany/img/app-gallery.jpg" alt="Spoany Studio 템플릿 고르기 화면" loading="lazy"><span class="t-disc"><img src="assets/covers/spoany.webp" alt=""></span></div>
+        <div class="t-info">
+          <div class="t-top"><span class="t-no">TRACK 02</span><span class="t-cat">Content System · Web App</span></div>
+          <h3>Real gym, real design.</h3>
+          <p class="t-sub">Spoany Studio — 스포애니 신중동점 홍보물 제작 웹앱</p>
+          <p class="t-state">AI 이미지가 넘쳐날수록, <strong>전문성</strong>이 보이는 헬스장 콘텐츠가 필요했습니다. 인포데스크에서 직접 쓰기 위해, Figma에 정리한 디자인 토큰을 코드로 그리는 웹앱으로 만들었습니다.</p>
+          <dl class="t-meta">
+            <dt>Role</dt><dd>현장 문제 발견 · 기획 · <b>디자인 토큰 정리(Figma)</b> · 디렉션 · 검수</dd>
+            <dt>AI</dt><dd>코드는 AI와 협업 · AI 문구 생성(API)</dd>
+            <dt>Result</dt><dd>스튜디오로 만든 게시물 평균 조회수 <b>약 1.4배</b></dd>
+          </dl>
+          <span class="t-go">케이스 스터디 보기 →</span>
+        </div>
+      </a>
+
+      <a class="track rv" href="matter-lab/" style="--c:#8fd14f;--c2:#c4f888">
+        <div class="t-media"><img src="matter-lab/img/hero.jpg" alt="Matter Lab 작업 화면 · 아비브 제품 사진 4장으로 만든 3D 오브제" loading="lazy"><span class="t-disc"><img src="assets/covers/matter.webp" alt=""></span></div>
+        <div class="t-info">
+          <div class="t-top"><span class="t-no">TRACK 03</span><span class="t-cat">3D Object Tool · Web App</span></div>
+          <h3>Four photos, one object.</h3>
+          <p class="t-sub">Matter Lab — 사진 4장으로 만드는 3D 오브제</p>
+          <p class="t-state">블렌더로 모델링하는 대신, <strong>제품 사진 네 장</strong>만으로 3D 오브제를 뽑아 주는 도구를 만들었습니다. 아비브 팝업 키오스크 그래픽을 위해 시작해, 졸업전시 무빙포스터에도 사용했습니다.</p>
+          <dl class="t-meta">
+            <dt>Role</dt><dd>기획 · 레퍼런스 분석 · <b>디렉션 · 테스트</b></dd>
+            <dt>AI</dt><dd>코드는 Claude와 협업 · Three.js 공개 기능 적용</dd>
+            <dt>Period</dt><dd>2026.11.6 – 11.7</dd>
+          </dl>
+          <span class="t-go">케이스 스터디 보기 →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- HOW I WORK WITH AI -->
+  <section class="sec" id="ai" aria-label="AI 활용 방식">
+    <div class="sec-head rv">
+      <div><span class="eyebrow">TRACK 04 · HOW I WORK</span><h2>제가 한 일,<br><i>AI가 한 일</i></h2></div>
+      <p>세 작업 모두 AI를 많이 활용했지만, 문제를 찾고 방향을 정하고 결과를 고르는 일은 제가 했습니다. 작업마다 어떻게 나눠서 일했는지 정리했습니다.</p>
+    </div>
+    <div class="ai">
+      <article class="ai-card rv" style="--c:#5d86ff">
+        <header><img src="assets/covers/luckin.webp" alt=""><div><b>Luckin Campaign</b><small>Figma · ChatGPT · Midjourney · Photoshop</small></div></header>
+        <div class="ai-row me"><h4>제가 한 일</h4><p>루이싱 리서치와 캠페인 기획, 웹사이트 디자인. 생성된 이미지 중 브랜드에 맞는 것을 고르고, 색감을 맞추고, 로고 하나까지 직접 넣었습니다.</p></div>
+        <div class="ai-row"><h4>AI와 함께 한 일</h4><p>ChatGPT에 도시 사진 무드 레퍼런스를 주고 루이싱 매장을 생성했고, Midjourney로 지하철·플랫폼 이미지와 영상을 만들었습니다.</p></div>
+        <div class="ai-out"><div><small>남긴 생성 이미지</small><b>ChatGPT 생성 이미지 116장 · 고르는 과정에서 버린 것까지 합하면 훨씬 많음</b></div></div>
+      </article>
+      <article class="ai-card rv" style="--c:#ff5c8a">
+        <header><img src="assets/covers/spoany.webp" alt=""><div><b>Spoany Studio</b><small>Figma · ChatGPT · Claude · GitHub Pages</small></div></header>
+        <div class="ai-row me"><h4>제가 한 일</h4><p>인포데스크에서 문제를 발견하고, 본사 홍보물에서 뽑은 디자인 시스템을 Figma에 토큰으로 직접 정리했습니다. 디렉션과 검수, 현장에서 쓰며 개선까지.</p></div>
+        <div class="ai-row"><h4>AI와 함께 한 일</h4><p>ChatGPT 이미지 생성은 화질과 가독성이 흔들려 방향을 바꿨고, 웹앱 코드는 AI와 협업했습니다. 앱 안의 AI 문구 기능은 API로 연결했습니다.</p></div>
+        <div class="ai-out"><div><small>인스타그램 @spoany36</small><b>평균 조회수 183회 · 기존 방식 피드(131회)보다 약 1.4배</b></div></div>
+      </article>
+      <article class="ai-card rv" style="--c:#8fd14f">
+        <header><img src="assets/covers/matter.webp" alt=""><div><b>Matter Lab</b><small>Claude · Three.js · GitHub Pages</small></div></header>
+        <div class="ai-row me"><h4>제가 한 일</h4><p>아비브 팝업 기획에서 필요를 찾고, 웹에이전시들의 3D 웹사이트를 레퍼런스로 분석했습니다. 막히는 부분은 여러 AI에 비교해 보며 방향을 잡고 테스트했습니다.</p></div>
+        <div class="ai-row"><h4>AI와 함께 한 일</h4><p>Three.js의 공개 기능(MIT 라이선스)을 Claude가 찾아 적용했고, 헤일로·윈도우 그래픽카드 문제를 함께 하나씩 해결했습니다.</p></div>
+        <div class="ai-out"><div><small>이어진 작업</small><b>졸업전시 BEYOND THE FRAME 무빙포스터에 같은 엔진 사용</b></div></div>
+      </article>
+    </div>
+    <div class="principle rv">
+      <span class="q" aria-hidden="true">“</span>
+      <div>
+        <blockquote>AI를 많이 활용했지만, 브랜드에 맞는 것을 고르고 색감을 맞추고 로고 하나까지 넣는 과정은 결국 제가 판단해야 하는 부분이었습니다.</blockquote>
+        <cite>— LUCKIN CAMPAIGN 회고 중</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="sec contact" id="contact" aria-label="연락처">
+    <div class="rv">
+      <span class="eyebrow">UP NEXT</span>
+      <h2>Let’s make<br>the <i>next track.</i></h2>
+      <p>새로운 프로젝트와 협업 제안을 기다립니다.</p>
+      <div class="links">
+        <a href="https://github.com/pueon01-max" target="_blank" rel="noopener">GITHUB ↗</a>
+        <a href="https://pueon01-max.github.io/spoany-studio/" target="_blank" rel="noopener">SPOANY STUDIO LIVE ↗</a>
+        <a href="https://pueon01-max.github.io/matter-lab/" target="_blank" rel="noopener">MATTER LAB LIVE ↗</a>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="foot"><span>© 2026 SON YE JIN</span><span>손예진 포트폴리오 · AI CASE STUDIES</span></footer>
+
+<script>
+(()=>{
+  const intro=document.getElementById('intro'),body=document.body;
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let seen=false;try{seen=sessionStorage.getItem('syj-intro')==='1'}catch(e){}
+  let ended=false,raf=0;
+  function endIntro(){
+    if(ended)return;ended=true;
+    try{sessionStorage.setItem('syj-intro','1')}catch(e){}
+    intro.classList.add('cover-in');
+    setTimeout(()=>{intro.classList.add('leaving');intro.classList.add('gone');body.classList.remove('intro-on');startHero()},reduce?200:1300);
+    setTimeout(()=>{cancelAnimationFrame(raf);intro.remove()},2600);
+  }
+  document.getElementById('skip').addEventListener('click',endIntro);
+  addEventListener('keydown',e=>{if(!ended&&(e.key==='Escape'||e.key==='Enter'||e.key===' '))endIntro()});
+  intro.addEventListener('wheel',()=>{if(typedDone)endIntro()},{passive:true});
+
+  if(seen){intro.remove();ended=true;body.classList.remove('intro-on');startHeroSoon();return void 0}
+
+  /* Hangul typing: each syllable is built from its jamo, like a real keyboard. */
+  const lines=[...intro.querySelectorAll('.mix-line')],caret=document.createElement('i');caret.className='mix-caret';
+  let typedDone=false;
+  const CHO='ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ';
+  function strokes(ch){const c=ch.charCodeAt(0)-0xAC00;if(c<0||c>11171)return[ch];const cho=Math.floor(c/588),jung=Math.floor(c%588/28),jong=c%28,out=[CHO[cho],String.fromCharCode(0xAC00+cho*588+jung*28)];if(jong)out.push(ch);return out}
+  const plan=[];lines.forEach((el,li)=>{let done='';for(const ch of el.dataset.text){strokes(ch).forEach(s=>plan.push({li,txt:done+s,space:ch===' '}));done+=ch}plan.push({li,pause:true})});
+  let pi=0;
+  function typeNext(){if(ended)return;const s=plan[pi++];
+    if(!s){typedDone=true;caret.classList.add('idle');setTimeout(endIntro,1500);return}
+    if(s.pause){setTimeout(typeNext,s.li===0?260:0);return}
+    const el=lines[s.li];el.textContent=s.txt;el.append(caret);
+    setTimeout(typeNext,s.space?80:24+Math.random()*26)}
+  if(reduce){lines.forEach(el=>el.textContent=el.dataset.text);lines[1].append(caret);typedDone=true;setTimeout(endIntro,2400)}
+  else setTimeout(typeNext,700);
+
+  /* Flowing gradient ribbons (same shader family as Weekly Playlist). */
+  const cv=intro.querySelector('.mix-bg'),gl=cv.getContext('webgl',{antialias:false,premultipliedAlpha:false});
+  let mx=.5,my=.5,smx=.5,smy=.5;intro.addEventListener('pointermove',e=>{mx=e.clientX/innerWidth;my=1-e.clientY/innerHeight});
+  if(!gl){intro.classList.add('no-gl');return}
+  const vs=`attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}`;
+  const fs=`precision highp float;uniform vec2 uRes,uMouse;uniform float uTime;
+  vec3 pal(float t){t=fract(t)*5.;vec3 a=vec3(.04,.05,.15),b=vec3(.15,.17,.50),c=vec3(.36,.44,.98),d=vec3(.64,.56,1.),e=vec3(.28,.72,.86);
+    if(t<1.)return mix(a,b,smoothstep(0.,1.,t));if(t<2.)return mix(b,c,smoothstep(1.,2.,t));if(t<3.)return mix(c,d,smoothstep(2.,3.,t));if(t<4.)return mix(d,e,smoothstep(3.,4.,t));return mix(e,a,smoothstep(4.,5.,t));}
+  void main(){vec2 uv=gl_FragCoord.xy/uRes;float asp=uRes.x/uRes.y;vec2 q=vec2(uv.x*asp,uv.y);float t=uTime*.075;
+    vec2 dm=uv-uMouse;q+=dm*.05*exp(-length(dm*vec2(asp,1.))*3.);
+    q.y+=.05*sin(q.x*1.7+t*2.6)+.025*sin(q.x*4.3-t*3.1);q.x+=.05*sin(q.y*2.6+t*1.6);
+    vec3 col=vec3(.024,.016,.06);
+    for(int i=0;i<6;i++){float fi=float(i);
+      float edge=1.02-fi*.175+.075*sin(q.x*(1.15+fi*.33)+t*(2.1+fi*.37)+fi*1.9)+.02*sin(q.x*5.5+t*5.+fi*2.3);
+      float m=smoothstep(edge+.11,edge-.11,q.y);float depth=clamp((edge-q.y)/.28,0.,1.);
+      vec3 rc=pal(fi*.17+.08+t*.05+.03*sin(t*1.3+fi))*(1.1-.42*depth);
+      rc+=vec3(.85,.9,1.)*exp(-pow((q.y-edge+.04)/.04,2.))*.08;col=mix(col,rc,m);}
+    vec2 pc=(uv-vec2(.5,.56))*vec2(asp,1.);float dA=length(pc),pa=.92+sin(uTime*.4)*.08;
+    vec3 purple=vec3(.62,.30,1.),blue=vec3(.25,.55,1.);
+    float orb=pow(max(0.,1.-dA/(.62*pa)),1.5);col=col+purple*orb*.5-col*purple*orb*.35;col+=vec3(1.,.98,1.)*pow(max(0.,1.-dA/(.15*pa)),2.)*.35;
+    float rip=0.;for(int j=0;j<6;j++){float fj=float(j),ph=fract(uTime*.07+fj/6.),rr=pow(ph,.85)*1.4;rip+=(1.-smoothstep(0.,.012+ph*.05,abs(dA-rr)))*(1.-ph)*.32;}
+    col+=mix(blue,purple,.5+.5*sin(dA*5.-uTime*.25))*rip;
+    col*=1.-smoothstep(.35,1.2,dA)*.45;col*=mix(1.,.72,smoothstep(.25,.95,uv.y));
+    gl_FragColor=vec4(col,1.);}`;
+  const sh=(ty,src)=>{const s=gl.createShader(ty);gl.shaderSource(s,src);gl.compileShader(s);return s};
+  const prog=gl.createProgram();gl.attachShader(prog,sh(gl.VERTEX_SHADER,vs));gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(prog);
+  if(!gl.getProgramParameter(prog,gl.LINK_STATUS)){intro.classList.add('no-gl');return}
+  gl.useProgram(prog);const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+  const loc=gl.getAttribLocation(prog,'p');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+  const uRes=gl.getUniformLocation(prog,'uRes'),uTime=gl.getUniformLocation(prog,'uTime'),uMouse=gl.getUniformLocation(prog,'uMouse');
+  function size(){const d=Math.min(devicePixelRatio||1,1.5);cv.width=innerWidth*d;cv.height=innerHeight*d;gl.viewport(0,0,cv.width,cv.height)}
+  size();addEventListener('resize',size);
+  const t0=performance.now();
+  (function loop(){smx+=(mx-smx)*.06;smy+=(my-smy)*.06;gl.uniform2f(uRes,cv.width,cv.height);gl.uniform1f(uTime,(performance.now()-t0)/1000);gl.uniform2f(uMouse,smx,smy);gl.drawArrays(gl.TRIANGLES,0,3);raf=requestAnimationFrame(loop)})();
+})();
+
+/* ── hero now-playing + reveal + header ── */
+let heroStarted=false;
+function startHeroSoon(){requestAnimationFrame(startHero)}
+function startHero(){
+  if(heroStarted)return;heroStarted=true;
+  const names=['Luckin Campaign','Spoany Studio','Matter Lab'],links=['luckin/','spoany/','matter-lab/'];
+  const imgs=[...document.querySelectorAll('#np-art img')],t=document.getElementById('np-t'),n=document.getElementById('np-n'),bar=document.getElementById('np-bar'),np=document.getElementById('np');
+  let i=0;
+  function show(k){imgs.forEach((im,j)=>im.classList.toggle('on',j===k));t.textContent=names[k];n.textContent=`0${k+1} / 03`;np.href=links[k];bar.classList.remove('run');void bar.offsetWidth;bar.classList.add('run')}
+  show(0);
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches)setInterval(()=>{i=(i+1)%3;show(i)},4600);
+}
+(()=>{
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+  const head=document.getElementById('head');
+  const dim=document.getElementById('dimmer');const onScroll=()=>{head.classList.toggle('solid',scrollY>40);dim.style.opacity=Math.min(.55,scrollY/innerHeight*.55)};onScroll();addEventListener('scroll',onScroll,{passive:true});
+})();
+</script>
+</body>
+</html>

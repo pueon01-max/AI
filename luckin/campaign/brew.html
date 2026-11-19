@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Luckin Coffee — Brew Your Luck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./brew.css" />
+</head>
+<body data-scene="s1">
+
+  <!-- real-time liquid (WebGL): clover, vortex and water surface -->
+  <canvas id="water" class="fx" aria-hidden="true"></canvas>
+
+  <header class="top">
+    <a class="brand" href="./index.html" aria-label="luckin coffee home">
+      <img src="imgs/deer-blue.webp" alt="" class="brand__deer" />
+      <img src="imgs/wordmark-blue.webp" alt="luckin coffee" class="brand__word" />
+    </a>
+    <div class="top__r">
+      <span class="lang">EN <i>∨</i></span>
+      <span class="ring" aria-hidden="true"></span>
+    </div>
+  </header>
+
+  <p class="scene-tag" id="sceneTag"><b>01</b><span>ENTRY</span></p>
+
+  <!-- 01 ENTRY — glossy clover on water -->
+  <section class="scr active" id="s1" aria-label="Entry">
+    <div class="s1-grid">
+      <div class="s1-copy">
+        <h1 class="big">You’re<br />missing<br />your luck.</h1>
+        <p class="lede">A lucky reward is waiting in this cup.<br />Only for the ones who brew it first.</p>
+        <button class="tap" id="tapBtn" type="button">
+          <span>Tap to brew it.</span>
+          <i class="caret">∨</i>
+        </button>
+      </div>
+
+      <button class="clover-btn" id="cloverBtn" type="button" aria-label="Brew my luck">
+        <span class="clover-shadow"></span>
+        <svg class="clover" id="clover" viewBox="-200 -200 400 400" aria-hidden="true"></svg>
+        <span class="bead" style="--x:8%;--y:20%;--s:16px;--d:0s"></span>
+        <span class="bead" style="--x:88%;--y:14%;--s:10px;--d:-1.2s"></span>
+        <span class="bead" style="--x:94%;--y:58%;--s:20px;--d:-2.4s"></span>
+        <span class="bead" style="--x:4%;--y:66%;--s:9px;--d:-3.1s"></span>
+        <span class="bead" style="--x:74%;--y:90%;--s:7px;--d:-.6s"></span>
+      </button>
+    </div>
+
+    <ol class="how" aria-label="How it works">
+      <li><b>01</b>Scan</li><li><b>02</b>Brew</li><li><b>03</b>Reveal</li><li><b>04</b>Claim</li>
+    </ol>
+
+    <div class="scroll-cue" aria-hidden="true"><span class="mouse"></span><em>SCROLL</em><i></i></div>
+  </section>
+
+  <!-- 02 BREWING — liquid vortex -->
+  <section class="scr" id="s2" aria-label="Brewing">
+    <div class="brew-center">
+      <img src="imgs/deer-blue.webp" alt="" class="brew-deer" />
+      <h2 class="brew-h2">Brewing<br />your luck…</h2>
+      <div class="dots"><i></i><i></i><i></i></div>
+      <p class="hold-hint" id="holdHint">Hold to stir faster</p>
+    </div>
+  </section>
+
+  <!-- 03 REVEAL — glass reward card -->
+  <section class="scr" id="s3" aria-label="Reveal">
+    <div class="split">
+      <div class="copy">
+        <p class="kicker">Your reward</p>
+        <h2 class="unlock">LUCK<br />UNLOCKED</h2>
+        <p class="unlock-sub">Something sweet<br />was waiting.</p>
+        <div class="cta-col">
+          <button class="btn-main" id="claimBtn" type="button">Claim in App →</button>
+          <button class="btn-ghost" id="tryAgainBtn" type="button">Try again ↺</button>
+        </div>
+      </div>
+
+      <div class="card-scene" id="cardScene">
+        <div class="g-card" id="gCard">
+          <div class="g-face g-back">
+            <svg viewBox="-200 -200 400 400" class="g-back__clover" id="cardClover" aria-hidden="true"></svg>
+            <span class="g-back__txt">luckin coffee</span>
+          </div>
+          <div class="g-face g-front">
+            <span class="g-holo"></span>
+            <span class="g-shine"></span>
+            <span class="g-new">NEW</span>
+            <span class="g-rarity" id="gRarity">COMMON</span>
+            <div class="g-icon" id="gIcon"></div>
+            <div class="g-txt">
+              <div class="g-name" id="gName">Free Upgrade</div>
+              <div class="g-sub" id="gSub">Any drink, any size</div>
+              <div class="g-valid" id="gValid">Valid for 7 days</div>
+            </div>
+          </div>
+        </div>
+        <span class="bead" style="--x:-4%;--y:12%;--s:22px;--d:-1s"></span>
+        <span class="bead" style="--x:102%;--y:26%;--s:14px;--d:-2s"></span>
+        <span class="bead" style="--x:96%;--y:92%;--s:26px;--d:-3s"></span>
+        <span class="bead" style="--x:6%;--y:98%;--s:10px;--d:0s"></span>
+        <div class="sparks" id="sparksEl"></div>
+        <div class="confetti" id="confettiEl"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 CLAIM — reward lives in the app -->
+  <section class="scr" id="s4" aria-label="Claim">
+    <div class="split">
+      <div class="copy">
+        <p class="kicker">Claim it</p>
+        <h2 class="mid">Your luck lives<br />in the Luckin app.</h2>
+        <p class="mid-sub">Download the app<br />to claim your reward.</p>
+        <div class="stores">
+          <a class="store" href="#" id="storeA">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10.5 18.5h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <span><small>Download on the</small>App Store</span>
+          </a>
+          <a class="store" href="#" id="storeG">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.8v16.4c0 .7.8 1.1 1.4.7l13-8.2c.6-.4.6-1.2 0-1.6l-13-8.2C6.8 2.7 6 3.1 6 3.8z" fill="currentColor"/></svg>
+            <span><small>Get it on</small>Google Play</span>
+          </a>
+        </div>
+        <button class="btn-link" id="toShareBtn" type="button">Share your luck →</button>
+      </div>
+
+      <div class="phone-wrap">
+        <div class="phone" id="phone">
+          <div class="phone__scr">
+            <div class="ps-status"><b>9:41</b><span class="ps-icons"><i></i><i></i><i></i></span></div>
+            <div class="ps-head"><img src="imgs/deer-white.webp" alt="" /><span>luckin coffee</span></div>
+            <div class="ps-body">
+              <p class="ps-title">My Rewards</p>
+              <div class="ps-card">
+                <div class="ps-ic" id="psIcon"></div>
+                <div>
+                  <b id="psName">Free Upgrade</b>
+                  <span id="psSub">Any drink, any size</span>
+                  <em id="psValid">Valid for 7 days</em>
+                </div>
+              </div>
+              <button class="ps-use" type="button" id="useNow">Use Now</button>
+              <div class="ps-row"><span>Vouchers</span><span>View all</span></div>
+              <ul class="ps-list">
+                <li><i class="v1"></i><span><b>2 Available</b>Coupons ready to use</span><em>›</em></li>
+                <li><i class="v2"></i><span><b>Luck Stamps</b>3 / 10 collected</span><em>›</em></li>
+              </ul>
+            </div>
+            <nav class="ps-tab">
+              <span><i class="t1"></i>Order</span>
+              <span><i class="t2"></i>Pickup</span>
+              <span><i class="t3"></i>Scan</span>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 SHARE — three luck cards -->
+  <section class="scr" id="s5" aria-label="Share">
+    <div class="split">
+      <div class="copy">
+        <p class="kicker">Pass it on</p>
+        <h2 class="mid">Share your luck.</h2>
+        <p class="mid-sub dark">Good luck looks better<br />when we share.</p>
+        <span class="tag">#BrewYourLuck</span>
+        <button class="btn-link" id="againBtn" type="button">Brew again ↺</button>
+      </div>
+
+      <div class="share-col">
+        <div class="fan" id="fan">
+          <button class="fc purple" data-i="0" type="button">
+            <span class="fc-ttl">Sweet<br />Signal<br />Detected</span>
+            <span class="fc-sub">Something sweet<br />was waiting.</span>
+            <span class="fc-logo"><img src="imgs/deer-white.webp" alt="" />luckin coffee</span>
+          </button>
+          <button class="fc blue is-main" data-i="1" type="button">
+            <span class="fc-ttl">Blue Luck<br />Unlocked</span>
+            <span class="fc-sub">Something sweet<br />was waiting.</span>
+            <span class="fc-logo"><img src="imgs/deer-white.webp" alt="" />luckin coffee</span>
+          </button>
+          <button class="fc gold" data-i="2" type="button">
+            <span class="fc-ttl">Today’s<br />Brew<br />Special</span>
+            <span class="fc-sub">Something sweet<br />was waiting.</span>
+            <span class="fc-logo"><img src="imgs/deer-white.webp" alt="" />luckin coffee</span>
+          </button>
+        </div>
+
+        <div class="socrow">
+          <button class="soc" id="socShare" type="button" aria-label="Share to stories">
+            <svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg>
+          </button>
+          <button class="soc" id="socX" type="button" aria-label="Share on X">
+            <svg viewBox="0 0 24 24"><path d="M5 4l14 16M19 4L5 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <button class="soc" id="socDownload" type="button" aria-label="Download card">
+            <svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 20h14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="soc" id="socMore" type="button" aria-label="More">
+            <svg viewBox="0 0 24 24"><circle cx="6" cy="12" r="1.7" fill="currentColor"/><circle cx="12" cy="12" r="1.7" fill="currentColor"/><circle cx="18" cy="12" r="1.7" fill="currentColor"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="steps" id="steps" aria-label="진행 단계">
+    <i class="on"></i><i></i><i></i><i></i><i></i>
+  </nav>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="./water.js"></script>
+  <script src="./brew.js"></script>
+</body>
+</html>
