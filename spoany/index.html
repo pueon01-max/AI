@@ -13,6 +13,28 @@
 .show-note{color:var(--a-mute);max-width:62ch;margin-top:-8px}
 .show-link{display:inline-flex;align-items:center;gap:8px;margin-top:6px;font:500 13px var(--mono);color:var(--a-hi);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px}
 @media (max-width:860px){.show{grid-template-columns:1fr 1fr}.show .pts{grid-column:1/-1}}
+/* versus: Matter Lab next to 3D AI sites */
+.vs-lead{color:var(--b-mute);max-width:60ch;margin-top:14px}
+.vs-cards{margin-top:clamp(28px,4vw,48px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.vs-card{border-radius:var(--r-card);overflow:hidden;background:var(--b-card);border:1px solid var(--b-line);display:flex;flex-direction:column}
+.vs-card .ph{aspect-ratio:16/10;background:#0d0f0c;overflow:hidden;position:relative}
+.vs-card .tags{position:absolute;inset:auto 0 10px 0;display:grid;padding:0 10px}.vs-card .tags.t2{grid-template-columns:.49fr .51fr}.vs-card .tags.t3{grid-template-columns:1fr 1fr 1fr}
+.vs-card .tags span{justify-self:start;padding:5px 9px;border-radius:99px;background:rgba(17,19,16,.72);color:#fff;font:500 11px/1 var(--mono);letter-spacing:.02em;backdrop-filter:blur(6px)}
+.vs-card .ph img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
+.vs-card .tx{padding:20px 22px 22px;display:flex;flex-direction:column;flex:1}
+.vs-card i{font:500 12px/1 var(--mono);color:var(--b-hi);font-style:normal}
+.vs-card b{display:block;margin:10px 0 14px;font:600 19px/1.3 var(--display);color:var(--b-ink);letter-spacing:-.01em}
+.vs-card dl{margin:auto 0 0;display:grid;gap:8px}
+.vs-card dl > div{padding:12px 14px;border-radius:12px;font-size:14px;line-height:1.55}
+.vs-card dt{font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.vs-card dd{margin:0}
+.vs-card .ai{background:var(--b-bg);color:var(--b-mute)}
+.vs-card .ml{background:var(--b-after);color:var(--b-ink)}.vs-card .ml dt{color:var(--b-hi)}
+.vs-honest{margin-top:16px;display:grid;grid-template-columns:minmax(0,.55fr) minmax(0,2fr);border-radius:var(--r-card);background:var(--sol-bg);color:var(--sol-ink)}
+.vs-honest b{padding:18px 24px;font:500 15px/1.4 var(--display);color:var(--sol-hi)}
+.vs-honest p{padding:18px 24px;margin:0;font-size:15px;line-height:1.6;opacity:.9}
+.vs-src{margin-top:14px;font-size:12px;color:var(--b-mute)}.vs-src a{color:inherit}
+@media (max-width:860px){.vs-cards,.vs-honest{grid-template-columns:1fr}.vs-honest b{padding-bottom:0}}
 /* spoany additions */
 .pnl.before.neutral .tag::before,.pnl.after.neutral .tag::before{content:none!important}
 .pnl.before.neutral{background:radial-gradient(70% 60% at 50% 40%,rgba(236,5,74,.18),transparent 70%),#1b1b21}
@@ -38,6 +60,7 @@
   .jr{flex-wrap:nowrap!important;overflow:visible!important;margin:0!important;padding:0!important;gap:20px!important}.jr li{flex:1 1 0!important;min-width:0!important}.jr li::after,.jr-hint{display:none!important}
   .jr .cap b{font-size:13px!important}.jr .cap span{font-size:11.5px!important}
   .chap{display:none!important}.hero-img{width:min(860px,100%)!important}.hero h1{font-size:150px!important}.overview{margin-top:56px!important}
+  .vs-cards,.vs-honest{break-inside:avoid!important}
   .dec{break-inside:avoid!important}.dec + .dec{break-before:page!important}
   .chips{display:none!important}
   .foot{display:none!important}
@@ -66,7 +89,15 @@ p{text-wrap:pretty}
 .feff b{display:block;font:500 17px/1.3 var(--display);letter-spacing:-.02em}
 .feff p{font-size:14px;color:var(--a-mute);margin-top:6px;line-height:1.55}
 .show-link.jr-link{margin-top:20px}
-@media (max-width:860px){.feff{grid-template-columns:1fr 1fr}}
+.panels.single[style*="--maxw"] .shots-web{max-width:var(--maxw);margin-inline:auto}
+.delta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.dl{display:grid;grid-template-columns:1fr auto;grid-template-areas:"k g" "a a" "b b";gap:4px 12px;padding:20px 22px;border-radius:var(--r-card);border:1px solid var(--a-gline);background:var(--a-glass)}
+.dl .k{grid-area:k;font:500 12px var(--mono);color:var(--a-mute)}
+.dl .g{grid-area:g;font:600 12px var(--display);padding:4px 10px;border-radius:99px;background:var(--a-hi);color:#111;align-self:start}
+.dl .a{grid-area:a;color:var(--a-mute);text-decoration:line-through;font-size:15px;margin-top:8px}
+.dl .b{grid-area:b;font:400 clamp(34px,3.6vw,48px)/1 var(--display);letter-spacing:-.04em}
+.todo{display:inline-block;border:1px dashed currentColor;opacity:.7;border-radius:6px;padding:0 8px;font-size:13px}
+@media (max-width:860px){.feff{grid-template-columns:1fr 1fr}.delta{grid-template-columns:1fr 1fr}}
 @media (max-width:520px){.feff{grid-template-columns:1fr}}
 </style></head><body>
 <meta charset="utf-8">
@@ -424,16 +455,16 @@ pre.schema{margin:0;padding:22px;border-radius:var(--r-card);background:#070a12;
 .plainv .xmap{border-radius:20px;box-shadow:0 20px 50px rgba(0,0,0,.18)}
 .diag .vis .phone,.diag .vis .web,.diag .vis .plainv{position:relative;width:100%}
 .diag .vis .phone{width:min(260px,70%)}
-.xm{position:absolute;transform:translate(-50%,-50%);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#ff4d3d;color:#fff;
-  box-shadow:0 0 0 4px rgba(255,255,255,.85),0 0 30px 8px rgba(255,77,61,.55);z-index:2;transition:transform .25s}
+.xm{position:absolute;transform:translate(-50%,-50%);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--xm,#ff4d3d);color:#fff;
+  box-shadow:0 0 0 4px rgba(255,255,255,.85),0 0 30px 8px var(--xm-glow,rgba(255,77,61,.55));z-index:2;transition:transform .25s}
 .xm b{font:700 16px var(--display)}
 .xm em{position:absolute;right:-6px;top:-6px;width:18px;height:18px;border-radius:50%;background:#1a1a1a;color:#fff;font:600 10px/18px var(--display);text-align:center;font-style:normal}
-.xm::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid #ff4d3d;animation:pulse 2.2s ease-out infinite}
+.xm::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--xm,#ff4d3d);animation:pulse 2.2s ease-out infinite}
 .xm.on{transform:translate(-50%,-50%) scale(1.25)}
-.issue i{width:28px!important;height:28px!important;margin-top:2px!important;display:grid;place-items:center;background:#ff4d3d!important;color:#fff;font:600 12px var(--display);font-style:normal;
-  box-shadow:0 0 0 5px rgba(255,77,61,.18)!important}
+.issue i{width:28px!important;height:28px!important;margin-top:2px!important;display:grid;place-items:center;background:var(--xm,#ff4d3d)!important;color:#fff;font:600 12px var(--display);font-style:normal;
+  box-shadow:0 0 0 5px var(--xm-ring,rgba(255,77,61,.18))!important}
 .issue{transition:background .25s;border-radius:12px}
-.issue.on{background:color-mix(in srgb,#ff4d3d 10%,transparent)}
+.issue.on{background:color-mix(in srgb,var(--xm,#ff4d3d) 10%,transparent)}
 
 /* metric donut */
 .hero-num.ring-on{display:grid;place-items:center;align-content:center;gap:4px;padding:16%;aspect-ratio:1;width:min(320px,100%);margin-inline:auto;position:relative}
@@ -703,7 +734,7 @@ function decisionVisual(d) {
   const afterInner = isPhone
     ? (v.after.length > 1 ? `<div class="shots">${v.after.map(a => one(a, "작업 화면")).join("")}</div>` : one(v.after[0], "작업 화면"))
     : `<div class="shots-web${v.after.length > 1 && v.before ? "" : v.after.length > 1 ? " two" : ""}">${v.after.map(a => one(a, "작업 결과물")).join("")}</div>`;
-  if (!v.before) return `<div class="panels single"><div class="pnl after"><span class="tag">OUTPUT</span>${afterInner}</div></div>`;
+  if (!v.before) return `<div class="panels single"${v.maxw ? ` style="--maxw:${v.maxw}"` : ""}><div class="pnl after"><span class="tag">OUTPUT</span>${afterInner}</div></div>`;
   const beforeInner = isPhone ? one(v.before, "기존 화면") : `<div class="shots-web">${one(v.before, "기존 결과물")}</div>`;
   const [lb, la] = v.labels || ["BEFORE", "AFTER"];
   return `<div class="panels"><div class="pnl before${v.neutral ? " neutral" : ""}"><span class="tag">${lb}</span>${beforeInner}</div><div class="pnl after${v.neutral ? " neutral" : ""}"><span class="tag">${la}</span>${afterInner}</div></div>`;
@@ -712,14 +743,33 @@ function decisionVisual(d) {
 function resultsHtml(rs) {
   if (!rs) return "";
   const max = Math.max(...rs.bars.map(b => b[1]));
-  const bars = rs.bars.map(([nm, v, ref]) => `<div class="bar-row${ref ? " ref" : ""}"><span>${nm}</span><div class="track"><div class="fill" style="width:${v / max * 100}%"></div></div><span class="pct">${v}회</span></div>`).join("");
+  const bars = rs.bars.map(([nm, v, ref]) => `<div class="bar-row${ref ? " ref" : ""}"><span>${nm}</span><div class="track"><div class="fill" style="width:${v / max * 100}%"></div></div><span class="pct">${typeof v === "number" ? v.toLocaleString("en-US") : v}회</span></div>`).join("");
   const stats = rs.stats.map(([v, u, p]) => `<div class="stat"><div class="v"><span class="cnt">${v}</span><small>${u}</small></div><p>${p}</p></div>`).join("");
-  return `<div class="wrap res"><p class="jr-t" style="margin-top:clamp(64px,9vw,120px)">실제 게시물에서 <b>더 높은 반응</b>이 나왔습니다</p>
+  return `<div class="wrap res"><p class="jr-t" style="margin-top:clamp(64px,9vw,120px)">${rs.title || "실제 게시물에서 <b>더 높은 반응</b>이 나왔습니다"}</p>
     <div class="ctx"><div class="metric"><div class="top"><span>${rs.sub}</span><span class="chip">${rs.chip}</span></div>
       <div class="hero-num"><div class="k">${rs.big.label}</div><div class="v"><span class="cnt">${rs.big.value}</span><small>${rs.big.unit}</small></div><div class="s">${rs.big.note}</div></div>
       <div class="bars wide">${bars}</div></div><div class="stack">${stats}</div></div>
     <p class="src">${rs.source}</p>
     ${rs.img ? `<figure class="jw"><img src="${rs.img[0]}" alt="스튜디오로 만든 실제 인스타그램 게시물"><figcaption>${rs.img[1]}</figcaption></figure>` : ""}</div>`;
+}
+
+function vsHtml(v, sec) {
+  if (!v) return "";
+  const card = ([src, h, ai, ml, tags], k) => `<article class="vs-card"><div class="ph"><img src="${src}" alt="${h} 화면">${tags ? `<div class="tags t${tags.length}">${tags.map(t => `<span>${t}</span>`).join("")}</div>` : ""}</div><div class="tx"><i>0${k + 1}</i><b>${h}</b>
+    <dl><div class="ai"><dt>3D AI 사이트</dt><dd>${ai}</dd></div><div class="ml"><dt>Matter Lab</dt><dd>${ml}</dd></div></dl></div></article>`;
+  return `<section class="rb room" id="ch-vs" data-ch="VS"><div class="wrap">${sec("Compare · 3D AI", "VS")}<p class="intent-t">${v.title}</p><p class="vs-lead">${v.lead}</p>
+    <div class="vs-cards rv">${v.points.map(card).join("")}</div>
+    <div class="vs-honest rv"><b>${v.honest[0]}</b><p>${v.honest[1]}</p></div><p class="vs-src">${v.source}</p></div></section>`;
+}
+function extrasHtml(c) {
+  let h = "";
+  if (c.delta) h += `<div class="wrap"><p class="jr-t" style="margin-top:clamp(64px,9vw,120px)">${c.delta.title}</p>
+    <div class="delta">${c.delta.items.map(([k, a, b, g]) => `<div class="dl"><span class="k">${k}</span><span class="a">${a}</span><span class="b">${b}</span><span class="g">${g}</span></div>`).join("")}</div>
+    <p class="src">${c.delta.note}</p>${c.delta.img ? `<figure class="jw" style="max-width:520px"><img src="${c.delta.img[0]}" alt="${c.delta.img[1]}"><figcaption>${c.delta.img[1]}</figcaption></figure>` : ""}</div>`;
+  if (c.next) h += `<div class="wrap"><p class="jr-t" style="margin-top:clamp(64px,9vw,120px)">${c.next.title}</p>
+    <div class="shifts">${c.next.items.map(([k, a, b]) => `<div class="shift"><span class="k">${k}</span><span class="from">${a}</span><span class="ar">→</span><span class="to">${b}</span></div>`).join("")}</div>
+    <p class="src">${c.next.note}</p></div>`;
+  return h;
 }
 
 function showcaseHtml(sc) {
@@ -807,7 +857,7 @@ function renderCase(key) {
       <div><div class="slider ${cp.kind === "phone" ? "phone-s" : cp.kind === "feed" ? "feed-s" : "web-s"}" id="slider" style="--pos:50%"><div class="screen">
         <img src="${cp.after}" alt="고친 뒤 결과"><img class="b" src="${cp.before}" alt="고치기 전 결과">
         <span class="t" style="left:14px">BEFORE</span><span class="t" style="right:14px">AFTER</span><span class="handle" aria-hidden="true"></span></div></div>
-      <input class="cmp-range" id="cmp-range" type="range" min="0" max="100" value="50" aria-label="전과 후 비교 위치"></div></div>${resultsHtml(c.results)}${showcaseHtml(c.showcase)}</section>` : "";
+      <input class="cmp-range" id="cmp-range" type="range" min="0" max="100" value="50" aria-label="전과 후 비교 위치"></div></div>${resultsHtml(c.results)}${showcaseHtml(c.showcase)}${extrasHtml(c)}</section>` : (c.results ? `<section class="ra room" id="ch-result" data-ch="RESULT"><div class="wrap">${sec("Result · Next", "RESULT")}</div>${resultsHtml(c.results)}${extrasHtml(c)}</section>` : "");
 
   /* intent map */
   let intent = "";
@@ -825,8 +875,8 @@ function renderCase(key) {
              : `<div class="imap"><div class="col">${L.map(card).join("")}</div>${screen}<div class="col">${R.map(card).join("")}</div></div>`}
     </div></section>`;
   }
-  const fixboard = fx ? `<section class="ra room" id="ch-what" data-ch="WHAT"><div class="wrap">${sec("Problem → Fix", "WHAT")}<h2 class="fxb-t">What changed</h2>
-      <p class="fxb-sub">아쉬웠던 점과 바꾼 점을 한 장에 정리했습니다.</p>
+  const fixboard = fx ? `<section class="ra room" id="ch-what" data-ch="WHAT"><div class="wrap">${sec("Problem → Fix", "WHAT")}<h2 class="fxb-t">${c.fixTitle || "What changed"}</h2>
+      <p class="fxb-sub">${c.fixSub || "아쉬웠던 점과 바꾼 점을 한 장에 정리했습니다."}</p>
       <div class="fxb">${fx.fixes.map(([icon, kw, p, f]) => `<div class="fx"><div class="ring">${ic(icon)}<b>${kw}</b></div><span class="kwm">${kw}</span>
         <div class="pill p"><i>✕</i><span>${p}</span></div><span class="arw" aria-hidden="true">→</span><div class="pill f"><i>✓</i><span>${f}</span></div></div>`).join("")}</div>
     </div></section>` : "";
@@ -841,9 +891,9 @@ function renderCase(key) {
     <div class="hv">${hero}${fx ? `<div class="chips" aria-hidden="true">${fx.fixes.slice(0, 4).map(([icon, kw], i) => `<span class="fchip c${i}">${ic(icon)}${kw}</span>`).join("")}</div>` : ""}</div>
     <div class="overview"><p class="big">${c.statement}</p>
       <div class="ov-body"><span class="lbl">[Overview]</span><p>${c.overview}</p><dl class="facts">${facts}</dl></div></div>
-    <nav class="chap" aria-label="이 케이스 스터디의 순서">${[["why", "WHY", "무엇이 문제였나"], ["what", "WHAT", "무엇을 바꿨나"], ["where", "WHERE", "어디에 담았나"], ["how", "HOW", "어떻게 결정했나"], ["flow", "FLOW", "실제 화면 흐름"], ["result", "RESULT", "전과 후"], ["learn", "LEARN", "과정과 회고"]]
-      .filter(([id]) => id !== "result" || c.compare).filter(([id]) => id !== "flow" || c.flow || JOURNEY[key]).filter(([id]) => (id !== "what" && id !== "where") || FX[key])
-      .map(([id, k, t], i) => `<button data-go="ch-${id}"><i>${i + 1}</i>${k}<span>${t}</span></button>`).join("")}</nav>
+    <nav class="chap" aria-label="이 케이스 스터디의 순서">${[["why", "WHY", "무엇이 문제였나"], ["what", "WHAT", "무엇을 바꿨나"], ["where", "WHERE", "어디에 담았나"], ["how", "HOW", "어떻게 결정했나"], ["flow", "FLOW", "실제 화면 흐름"], ["result", "RESULT", "전과 후"], ["vs", "VS", "3D AI와 비교"], ["learn", "LEARN", "과정과 회고"]]
+      .filter(([id]) => id !== "result" || c.compare || c.results).filter(([id]) => id !== "vs" || c.versus).filter(([id]) => id !== "flow" || c.flow || JOURNEY[key]).filter(([id]) => (id !== "what" && id !== "where") || FX[key])
+      .map(([id, k, t], i) => `<button data-go="ch-${id}"><i>${i + 1}</i>${k}<span>${id === "result" && !c.compare ? "결과와 다음" : t}</span></button>`).join("")}</nav>
   </div></section>
   <section class="ra room" id="ch-why" data-ch="WHY"><div class="wrap">${sec("Context · Problem", "WHY")}${ctx}</div></section>
   ${fixboard}
@@ -851,6 +901,7 @@ function renderCase(key) {
   <section class="rb room" id="ch-how" data-ch="HOW"><div class="wrap">${sec("Key decisions", "HOW")}${decs}</div></section>
   ${flow}
   ${compare}
+  ${vsHtml(c.versus, sec)}
   <section class="rb room" id="ch-learn" data-ch="LEARN"><div class="wrap">${sec("Process", "LEARN")}<ol class="proc">${proc}</ol></div></section>
   <section class="rb room" style="padding-top:0"><div class="wrap">${sec("Reflection")}<div class="refl"><blockquote>${c.reflection.quote}</blockquote><div class="learn">${learn}</div></div></div></section>
   <div class="rb"><div class="wrap foot"><span>${c.meta[1]}</span><span>${c.meta[2]}</span></div></div>`;
@@ -959,5 +1010,5 @@ addEventListener("hashchange", () => { route(); scrollTo(0, 0); });
 route();
 </script>
 
-</body><script src="../assets/case-nav.js"></script>
-</html>
+<script src="../assets/case-nav.js"></script>
+</body></html>
