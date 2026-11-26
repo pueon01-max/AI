@@ -654,16 +654,16 @@ const CASES = {
       ["Find", "아비브가 동남아 B2B 사업에 관심이 많은 것을 보고, 싱가포르에서 직접 본 몰 풍경과 친구들의 이야기를 연결해 팝업을 떠올렸습니다."],
       ["Research", "시장조사와 사실 확인을 많이 거쳐야 했기 때문에, 조사한 내용을 .MD 파일로 먼저 정리했습니다. 수치는 원문에서 다시 확인하고 맞지 않는 것은 고치거나 뺐습니다."],
       ["BX", "양란과 아비브의 '덜어냄'을 기준으로 제품, 무드보드, 톤앤무드를 정했습니다. 레퍼런스를 모으고 코덱스로 미니멀하고 기하학적인 용기를 여러 안 뽑아 하나로 좁혔습니다."],
-      ["Design", "피그마를 코덱스, Claude와 연결해 한 페이지 안에서 줄을 그어 가며 라운드별로 작업 흐름을 순서대로 쌓았습니다. 확정된 뒤에는 컴포넌트를 만들고 한국어로 이름을 정리했습니다."],
-      ["Build", "정리한 컴포넌트로 웹 · 모바일 · 키오스크 화면 39개를 조립했습니다. 이 화면을 기준으로 웹사이트를 직접 코딩하고 있습니다."]
+      ["Design", "피그마를 코덱스, Claude와 연결해 한 페이지 안에서 줄을 그어 가며 라운드별로 기획 흐름을 순서대로 쌓았습니다."],
+      ["Build", "확정된 기획으로 컴포넌트를 만들어 웹 · 모바일 · 키오스크 화면을 만들었습니다. 이 화면을 기준으로 웹사이트를 직접 코딩하고 있습니다."]
     ],
     flow: { title: "설문으로 시작해서, 사진 한 장으로 끝나는 팝업",
       goal: "웹에서 FOMO를 만들고, 현장에서 제품을 받고, 사진으로 자랑하게 만드는 흐름입니다.",
       steps: [["설문", "Survey", "피부 타입과 하루 습관을 묻는 질문 네 개로 나에게 맞는 에디션을 보여 줍니다."],
               ["티켓", "Mobile Ticket", "방문 시간대를 고르고 정보를 넣으면 QR 모바일 티켓이 발급됩니다."],
               ["교환", "Exchange", "현장 키오스크에서 QR로 체크인하고 한정판 선스틱을 받습니다."],
-              ["포토부스", "Photo booth", "프레임을 고르고 세 컷을 찍으면 아크릴 블록으로 인쇄됩니다."],
-              ["자랑", "Share", "QR로 내 사진을 받아 SNS에 올립니다."]] },
+              ["포토부스", "Photo booth", "현장 키오스크에서 티켓 QR을 스캔해 입장하고, 프레임을 골라 세 컷을 찍습니다."],
+              ["자랑", "Share", "부스 화면의 QR을 웹으로 스캔해 내 사진을 받고 SNS에 올립니다."]] },
     decisions: [
       { tag: "Decision 01", title: "싱가포르에서만 살 수 있는, 한정판 하나",
         body: "싱가포르도 한국처럼 한정판에 줄을 서고 수량 제한이 걸리는 문화가 있었습니다. 그래서 어디서나 살 수 있는 아비브가 아니라, 싱가포르에서만 받을 수 있는 에디션 하나를 만들기로 했습니다.",
@@ -684,13 +684,13 @@ const CASES = {
         problem: "아비브의 싱가포르 진출은 Watsons에서 짧게 한 런칭 행사 정도라, 브랜드를 직접 경험할 수 있는 자리가 없었습니다.",
         evidence: "ION Orchard 올리브영 팝업은 QR 설문 → 샘플 → WhatsApp 대기 알림으로 운영되었습니다(TheSmartLocal, 2026.10). 현지에서 이미 같은 방식이 익숙했습니다.",
         solution: "질문 네 개로 <strong>나에게 맞는 에디션</strong>을 보여 주고, 방문 시간대를 골라 <strong>QR 모바일 티켓</strong>을 받습니다. 현장 키오스크에서 QR로 체크인하면 한정판 선스틱을 교환합니다." },
-      { tag: "Decision 04", title: "자랑할 수 있는 사진, 아크릴 블록 3컷 포토부스",
+      { tag: "Decision 04", title: "자랑할 수 있는 사진, 웹으로 스캔해 받는 포토부스",
         body: "경쟁 사회에서 자라 SNS에 자랑하는 문화가 커뮤니티에서 자주 보였습니다. 제품만 받고 끝나는 것이 아니라, 올릴 수 있는 사진 한 장까지 주고 싶었습니다. rhode와 뉴트로지나에도 비슷한 팝업이 있는 것으로 알고 있어서 먼저 사실인지 확인했습니다.",
         visual: { kind: "web", plain: true, before: null, after: [{ src: "img/evidence-popups.jpg" }] },
         problem: "제품을 받고 나면 팝업의 경험이 그 자리에서 끝나 버렸습니다.",
         evidence: "rhode는 2024년 코첼라에서 코인을 넣고 립 제품을 고른 뒤 사진을 찍으면 제품을 받는 부스를 선보였고, 2025년 9월 세포라 타임스스퀘어에서는 구매 고객에게 티켓을 주고 부스에서 사진을 찍은 뒤 립 제품을 받게 했습니다. 뉴트로지나는 자판기가 아니라 은행 콘셉트의 'Collagen Bank' 팝업으로, 입장 티켓과 게임 보상 방식이었습니다. 싱가포르 18–29세의 71%는 인스타그램에서 새 제품을 발견합니다(YouGov 2025).",
-        evidenceImg: ["img/acrylic-ref.jpg", "직접 고른", "아크릴 블록 레퍼런스"],
-        solution: "제품 교환과 사진을 한 부스에 묶고, 인화지 대신 <strong>아크릴 블록 3컷</strong>으로 인쇄해 제품 용기와 같은 투명한 재질로 맞췄습니다. 원본은 <strong>QR로 받아 바로 SNS에</strong> 올릴 수 있습니다." },
+        evidenceImg: ["img/k01.jpg", "현장 키오스크", "티켓 QR 스캔 화면"],
+        solution: "제품 교환과 사진을 한 흐름으로 묶었습니다. 웹에서 받은 <strong>티켓 QR을 스캔</strong>해 입장하고, 세 컷을 찍은 뒤 <strong>부스 화면의 QR을 웹으로 스캔</strong>해 내 사진을 받아 바로 SNS에 올립니다. 포토부스의 핵심은 인쇄물이 아니라, 휴대폰으로 바로 받아 자랑할 수 있는 사진입니다." },
       { tag: "Decision 05", title: "사이트 레퍼런스를 모아, 그림자에서 오브제로",
         body: "웹 흐름(인트로 → 등장 → 한정판 → 설문 → 티켓 → 포토부스)의 단계마다 사용자가 느낄 감정을 먼저 정하고, 단계마다 볼 만한 실제 사이트 19곳을 모아 연출을 짝지었습니다.",
         visual: { kind: "web", plain: true, labels: ["cosmos 레퍼런스에서 출발한 웹 제안 5", "단계별 사이트 레퍼런스 보드"], before: { src: "img/web-proposals.jpg" }, after: [{ src: "img/refsite.jpg" }] },
@@ -704,19 +704,18 @@ const CASES = {
         evidence: "같은 연출을 Quiet Daylight · Bright Drop · Orchid Night 세 버전으로 만들어 비교했을 때, 어두운 배경에서만 레진의 빛과 꽃잎이 또렷하게 떠올랐습니다.",
         solution: "바탕은 <strong>Night #111014</strong>, 포인트는 <strong>Petal #F3D6DE</strong>와 <strong>Orchid #B0306A</strong> 두 가지로만 두었습니다. 글자는 소문자 위주로 정리해 덜어냄의 톤을 유지했습니다." }
     ],
-    compare: { kind: "web", title: "보기 좋은 티켓에서,<br>현장에서 쓰는 티켓으로", note: "처음 티켓 시안(전)에는 날짜와 QR만 있었습니다. 현장에서 실제로 쓰려면 지금 몇 단계인지, 티켓이 어디로 갔는지, 다시 꺼내 보는 방법이 필요해서 진행 단계 · 메일 발송 알림 · 지갑에 추가를 더했습니다(후). 손잡이를 움직이면 겹쳐 볼 수 있습니다.", before: "img/mock11.jpg", after: "img/w11.jpg" },
     showcase: {
-      title: "포토부스 결과물, <b>아크릴 블록 3컷</b>",
-      note: "현장 키오스크에서 프레임을 고르고 세 컷을 찍으면, 한정판 선스틱과 함께 아크릴 블록으로 인쇄된 사진을 받습니다. 사진 속 인물과 제품은 이미지 생성으로 만든 예시입니다.",
-      poster: ["img/acrylic-product.jpg", "아크릴 블록 3컷 · 제품과 함께"],
-      kiosk: ["img/k06.jpg", "1080 × 1920 키오스크 · 카운트다운"],
-      points: [["frame", "인트로와 같은 그림자", "부스 벽과 프레임에 웹 인트로의 양란 그림자를 넣어 처음과 끝을 맞췄습니다."],
-               ["layers", "인화지 대신 아크릴", "투명한 블록에 세 컷을 넣어 제품 용기와 같은 재질감으로 맞췄습니다."],
-               ["qr", "QR로 내 사진 받기", "인쇄와 함께 QR로 원본을 받아 바로 SNS에 올릴 수 있게 했습니다."]] },
+      title: "포토부스, <b>스캔으로 시작해서 웹으로 받기</b>",
+      note: "현장 키오스크에서 티켓 QR을 스캔해 입장하고 세 컷을 찍으면, 부스 화면의 QR을 웹으로 스캔해 사진을 받습니다. 왼쪽 결과물 사진은 포토부스의 무드를 보여 주기 위한 이미지 예시입니다.",
+      poster: ["img/acrylic-product.jpg", "포토부스 결과물 무드 · 이미지 예시"],
+      kiosk: ["img/k01.jpg", "1080 × 1920 키오스크 · 티켓 QR 스캔"],
+      points: [["qr", "티켓 QR로 입장", "웹에서 받은 모바일 티켓을 키오스크에 스캔하면 체크인과 제품 교환이 이어집니다."],
+               ["frame", "인트로와 같은 그림자", "부스 벽과 프레임에 웹 인트로의 양란 그림자를 넣어 처음과 끝을 맞췄습니다."],
+               ["arrow-out", "웹으로 사진 받기", "촬영이 끝나면 부스 화면의 QR을 스캔해 웹에서 세 컷을 받고 바로 SNS에 올립니다."]] },
     reflection: {
       quote: "기억에 기대지 않고,<br><em>확인한 것으로만</em> 기획하려고 했습니다.",
       learnings: [
-        ["What I made · 만든 것", "싱가포르 한정판 제품과 웹 · 모바일 · 키오스크 화면 39개, 그리고 그 화면을 만드는 컴포넌트까지 정리했습니다. 지금은 이 화면을 기준으로 웹사이트를 직접 코딩하고 있습니다."],
+        ["What I made · 만든 것", "싱가포르 한정판 제품과 설문 → 티켓 → 교환 → 포토부스로 이어지는 팝업 흐름을 기획하고, 컴포넌트를 만들어 웹 · 모바일 · 키오스크 화면으로 정리했습니다. 지금은 이 화면을 기준으로 웹사이트를 직접 코딩하고 있습니다."],
         ["How I worked · 일하는 방식", "피그마를 코덱스, Claude와 연결해 한 페이지에서 줄을 그어 가며 작업하니, 레퍼런스에서 제품과 화면까지 어떤 결정이 어디서 나왔는지 다시 볼 수 있었습니다. 특히 rhode와 뉴트로지나처럼 알고 있다고 생각한 사례도 직접 확인해 보니 다른 부분이 있었습니다."],
         ["Limit · 아직 남은 부분", "제품 사진, 장면, 인물 사진은 이미지 생성으로 만든 예시입니다. 수량 1,000개, 12월 5일, 가격 같은 값은 가설이고, 레진 인몰드 용기를 화장품에 쓸 수 있는지는 아직 확인이 필요합니다. 웹의 3D 회전은 Matter Lab으로 만든 오브제를 연결할 예정입니다."]
       ]
@@ -733,10 +732,10 @@ const ATM = {
 
 const JOURNEY = {
   abib: { title: "모바일 웹, <b>순서대로</b>", kind: "phones",
-    items: [["img/m01.jpg", "인트로", "확대한 양란 꽃결과 We've arrived."], ["img/m03.jpg", "한정판", "3D로 돌려 보는 선스틱 · 카운트다운"], ["img/m04.jpg", "설문", "하루 습관을 묻는 질문 네 개"], ["img/m08.jpg", "결과", "나에게 맞는 에디션만 선명하게"], ["img/m11.jpg", "모바일 티켓", "시간대 · 게이트 · QR"], ["img/m14.jpg", "내 사진 받기", "세 컷을 저장하고 공유"]],
-    extra: { title: "현장 키오스크 · 1080 × 1920", items: [["img/k01.jpg", "대기", "그림자 부스 · QR을 대 주세요"], ["img/k04.jpg", "프레임 선택", "아크릴 · 블랙 · 종이"], ["img/k06.jpg", "카운트다운", "제품을 얼굴 옆에"], ["img/k09.jpg", "사진 확인", "세 컷을 고르고 인쇄"], ["img/k11.jpg", "완료", "아크릴 블록과 QR"]] },
+    items: [["img/m01.jpg", "인트로", "확대한 양란 꽃결과 We've arrived."], ["img/m03.jpg", "한정판", "3D로 돌려 보는 선스틱 · 카운트다운"], ["img/m04.jpg", "설문", "하루 습관을 묻는 질문 네 개"], ["img/m08.jpg", "결과", "나에게 맞는 에디션만 선명하게"], ["img/m11.jpg", "모바일 티켓", "시간대 · 게이트 · QR"], ["img/m14.jpg", "내 사진 받기", "부스 QR 스캔 → 저장하고 공유"]],
+    extra: { title: "현장 키오스크 · 1080 × 1920", items: [["img/k01.jpg", "대기", "티켓 QR을 스캔해 입장"], ["img/k04.jpg", "프레임 선택", "세 가지 프레임 중 고르기"], ["img/k06.jpg", "카운트다운", "제품을 얼굴 옆에"], ["img/k09.jpg", "사진 확인", "세 컷을 확인"], ["img/k11.jpg", "완료", "QR을 스캔해 웹에서 사진 받기"]] },
     site: { title: "데스크톱 웹, <b>14개 화면 중</b>", items: [["img/w01.jpg", "인트로", "양란 그림자 · 첫 방문만 3초"], ["img/w02.jpg", "등장", "떠오르는 오브제 · the first month."], ["img/w03.jpg", "한정판", "3D 회전 · 수량 · 카운트다운"], ["img/w04.jpg", "설문", "흐린 사진 위 짧은 질문"], ["img/w08.jpg", "결과", "나의 오브제"], ["img/w09.jpg", "시간대", "방문 날짜와 슬롯"], ["img/w11.jpg", "티켓", "QR 입장 티켓"], ["img/w12.jpg", "팝업 안내", "ION Orchard B4 · 지도"], ["img/w13.jpg", "포토부스 소개", "세 컷, 블록 하나"], ["img/w14.jpg", "내 사진 받기", "다운로드 · 공유"]] },
-    wide: ["img/mobile-all.jpg", "모바일 14개 화면 전체 · 같은 컴포넌트로 조립"] }
+    wide: ["img/mobile-all.jpg", "모바일 화면 전체"] }
 };
 
 /* Symbols */
@@ -768,7 +767,7 @@ const FX = {
     fixes: [["bookmark", "SG Only", "어디서나 살 수 있는 아비브", "싱가포르에서만 · 1인 1개 한정판"],
             ["drop", "Orchid Stick", "넓게 퍼진 휴대용 제품군", "양란 한 송이 · 작은 선스틱 하나"],
             ["qr", "Survey → Ticket", "짧게 끝난 Watsons 런칭 행사", "피부 설문 → 모바일 티켓 → 교환"],
-            ["frame", "Photo Booth", "제품만 받고 끝나는 경험", "자랑할 3컷 · 아크릴 블록"],
+            ["frame", "Photo Booth", "제품만 받고 끝나는 경험", "QR 스캔 → 3컷 → 웹으로 사진 받기"],
             ["layers", "Shadow → Object", "처음부터 다 보여 주는 제품 페이지", "그림자 → 떠오르는 오브제 → 3D"],
             ["light", "Orchid Night", "밝은 톤에 묻히는 투명 레진", "어두운 바탕 · 포인트 두 가지"]] }
 };
@@ -948,7 +947,7 @@ function renderCase(key) {
       <div><div class="slider ${cp.kind === "phone" ? "phone-s" : cp.kind === "feed" ? "feed-s" : "web-s"}" id="slider" style="--pos:50%"><div class="screen">
         <img src="${cp.after}" alt="고친 뒤 결과"><img class="b" src="${cp.before}" alt="고치기 전 결과">
         <span class="t" style="left:14px">BEFORE</span><span class="t" style="right:14px">AFTER</span><span class="handle" aria-hidden="true"></span></div></div>
-      <input class="cmp-range" id="cmp-range" type="range" min="0" max="100" value="50" aria-label="전과 후 비교 위치"></div></div>${resultsHtml(c.results)}${showcaseHtml(c.showcase)}${extrasHtml(c)}</section>` : (c.results ? `<section class="ra room" id="ch-result" data-ch="RESULT"><div class="wrap">${sec("Result · Next", "RESULT")}</div>${resultsHtml(c.results)}${extrasHtml(c)}</section>` : "");
+      <input class="cmp-range" id="cmp-range" type="range" min="0" max="100" value="50" aria-label="전과 후 비교 위치"></div></div>${resultsHtml(c.results)}${showcaseHtml(c.showcase)}${extrasHtml(c)}</section>` : ((c.results || c.showcase) ? `<section class="ra room" id="ch-result" data-ch="RESULT"><div class="wrap">${sec("Pop-up · Photo booth", "RESULT")}</div>${resultsHtml(c.results)}${showcaseHtml(c.showcase)}${extrasHtml(c)}</section>` : "");
 
   /* intent map */
   let intent = "";
@@ -983,8 +982,8 @@ function renderCase(key) {
     <div class="overview"><p class="big">${c.statement}</p>
       <div class="ov-body"><span class="lbl">[Overview]</span><p>${c.overview}</p><dl class="facts">${facts}</dl></div></div>
     <nav class="chap" aria-label="이 케이스 스터디의 순서">${[["why", "WHY", "무엇이 문제였나"], ["what", "WHAT", "무엇을 바꿨나"], ["where", "WHERE", "어디에 담았나"], ["how", "HOW", "어떻게 결정했나"], ["flow", "FLOW", "실제 화면 흐름"], ["result", "RESULT", "전과 후"], ["learn", "LEARN", "과정과 회고"]]
-      .filter(([id]) => id !== "result" || c.compare || c.results).filter(([id]) => id !== "vs" || c.versus).filter(([id]) => id !== "flow" || c.flow || JOURNEY[key]).filter(([id]) => (id !== "what" && id !== "where") || FX[key])
-      .map(([id, k, t], i) => `<button data-go="ch-${id}"><i>${i + 1}</i>${k}<span>${id === "result" && !c.compare ? "결과와 다음" : t}</span></button>`).join("")}</nav>
+      .filter(([id]) => id !== "result" || c.compare || c.results || c.showcase).filter(([id]) => id !== "vs" || c.versus).filter(([id]) => id !== "flow" || c.flow || JOURNEY[key]).filter(([id]) => (id !== "what" && id !== "where") || FX[key])
+      .map(([id, k, t], i) => `<button data-go="ch-${id}"><i>${i + 1}</i>${k}<span>${id === "result" && !c.compare ? "포토부스" : t}</span></button>`).join("")}</nav>
   </div></section>
   <section class="ra room" id="ch-why" data-ch="WHY"><div class="wrap">${sec("Context · Problem", "WHY")}${ctx}</div></section>
   ${fixboard}
