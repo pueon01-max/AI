@@ -106,6 +106,16 @@
 @media (max-width:980px){.cp-grid{grid-template-columns:1fr 1fr}.cost-2{grid-template-columns:1fr}}
 @media (max-width:560px){.cp-grid{grid-template-columns:1fr}.yb{grid-template-columns:110px 1fr 56px}}
 
+.finale{position:relative;padding:clamp(120px,16vw,220px) 0 clamp(80px,12vw,160px);background:linear-gradient(180deg,var(--b-bg) 0%,color-mix(in srgb,var(--mark) 60%,var(--a-bg)) 14%,color-mix(in srgb,var(--mark) 30%,var(--a-bg)) 40%,var(--a-bg) 100%);color:var(--a-ink);overflow:hidden}
+.finale::before{content:"";position:absolute;inset:auto -10% -30% -10%;height:70%;background:radial-gradient(50% 60% at 50% 100%,var(--glow),transparent 70%);pointer-events:none}
+.fin-eb{position:relative;font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:color-mix(in srgb,var(--a-ink) 70%,transparent)}
+.fin-t{position:relative;margin-top:14px;font:400 clamp(30px,4vw,56px)/1.12 var(--display);letter-spacing:-.04em}
+.fin-t b{font-weight:600;color:var(--a-hi)}
+.fin-fig{position:relative;margin:clamp(32px,4vw,56px) 0 0;border-radius:clamp(16px,2vw,28px);overflow:hidden;box-shadow:0 40px 120px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.08)}
+.fin-fig img{display:block;width:100%;height:auto}
+.fin-cap{position:relative;margin-top:18px;font-size:14px;color:color-mix(in srgb,var(--a-ink) 72%,transparent)}
+.fin-cap a{color:var(--a-hi)}
+
 /* shared additions: written-out flow, journey links, tidy paragraphs */
 p{text-wrap:pretty}
 .flow-goal{color:var(--a-mute);max-width:62ch;margin:-12px 0 clamp(24px,3vw,36px)}
@@ -686,6 +696,9 @@ const CASES = {
         solution: "그 이미지를 다시 <strong>Midjourney에서 영상으로 생성</strong>해, 포스터를 중심으로 장면이 자연스럽게 전환되는 캠페인 영상을 만들었습니다." }
     ],
     compare: { kind: "web", title: "시안 위에<br>설계도를 그리다", note: "원본 시안 위에 섹션마다 적용할 인터랙션을 직접 적었습니다. 이 시안과 설계도, 섹션별 요구사항을 정리한 글을 프롬프트로 묶어 넣어, 기획에는 시간이 걸렸지만 웹사이트를 만드는 시간은 많이 줄일 수 있었습니다.", before: "img/hq/camp-home-orig.jpg", after: "img/hq/camp-home-memo.jpg" },
+    finale: { src: "img/poster-subway-seoul.jpg", alt: "지하철 벽에 붙은 Go get ur luck 서울 QR 포스터 합성 이미지",
+      eyebrow: "Seoul Series · QR Poster", title: "출근길 지하철에서,<br><b>QR 한 번으로 행운을</b>",
+      caption: "포스터의 QR을 찍으면 실제로 만든 브루잉 웹으로 연결됩니다.", link: ["campaign/brew.html", "브루잉 웹 열기"] },
     reflection: {
       quote: "생성은 AI가,<br><em>고르고 다듬는 건</em> 제가.",
       learnings: [
@@ -811,6 +824,14 @@ function costHtml(k) {
     <div class="cost-2"><div class="yr"><span class="lbl">${k.year.title}</span>${k.year.bars.map(([n, v, me]) => `<div class="yb${me ? " me" : ""}"><span class="n">${n}</span><span class="t"><i style="--w:${(v / max * 100).toFixed(1)}%"></i></span><span class="v">${k.year.unit}${v % 1 ? v.toFixed(1) : v}</span></div>`).join("")}<p>${k.year.note}</p></div>
     <div class="sc"><span class="lbl">${k.scenario.title}</span>${k.scenario.rows.map(([n, t, me]) => `<div class="sr${me ? " me" : ""}"><b>${n}</b><span>${t}</span></div>`).join("")}</div></div>
     <p class="vs-src">${k.source}</p></div>`;
+}
+function finaleHtml(f) {
+  if (!f) return "";
+  return `<section class="finale" aria-label="${f.alt}"><div class="wrap">
+    ${f.eyebrow ? `<p class="fin-eb">${f.eyebrow}</p>` : ""}${f.title ? `<p class="fin-t">${f.title}</p>` : ""}
+    <figure class="fin-fig rv"><img src="${f.src}" alt="${f.alt}"></figure>
+    ${f.caption ? `<p class="fin-cap">${f.caption}${f.link ? ` <a href="${f.link[0]}" target="_blank" rel="noopener">${f.link[1]} ↗</a>` : ""}</p>` : ""}
+  </div></section>`;
 }
 function vsHtml(v, sec) {
   if (!v) return "";
@@ -961,6 +982,7 @@ function renderCase(key) {
   ${flow}
   ${compare}
   ${vsHtml(c.versus, sec)}
+  ${finaleHtml(c.finale)}
   <section class="rb room" id="ch-learn" data-ch="LEARN"><div class="wrap">${sec("Process", "LEARN")}<ol class="proc">${proc}</ol></div></section>
   <section class="rb room" style="padding-top:0"><div class="wrap">${sec("Reflection")}<div class="refl"><blockquote>${c.reflection.quote}</blockquote><div class="learn">${learn}</div></div></div></section>
   <div class="rb"><div class="wrap foot">${c.logo ? `<img class="foot-logo" src="${c.logo[0]}" alt="${c.logo[1]}">` : `<span>${c.meta[1]}</span>`}<span>${c.meta[2]}</span></div></div>`;
