@@ -955,6 +955,27 @@ function renderCase(key) {
   <section class="rb room" style="padding-top:0"><div class="wrap">${sec("Reflection")}<div class="refl"><blockquote>${c.reflection.quote}</blockquote><div class="learn">${learn}</div></div></div></section>
   <div class="rb"><div class="wrap foot">${c.logo ? `<img class="foot-logo" src="${c.logo[0]}" alt="${c.logo[1]}">` : `<span>${c.meta[1]}</span>`}<span>${c.meta[2]}</span></div></div>`;
 
+
+  // a Korean sentence ending (…다. / …요. / …”.) followed by a space → line break, in body text only
+  (() => {
+    const END = /([가-힣)”’"])([.!?])\s+(?=\S)/g;
+    document.querySelectorAll("#view p, #view dd, #view figcaption, #view .vs-lead").forEach(el => {
+      if (el.closest("h1, h2, h3, blockquote, .src, .vs-src")) return;
+      const walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+      const nodes = []; while (walk.nextNode()) nodes.push(walk.currentNode);
+      nodes.forEach(t => {
+        if (!END.test(t.data)) return; END.lastIndex = 0;
+        const parts = t.data.split(END); const frag = document.createDocumentFragment();
+        for (let i = 0; i < parts.length; i += 3) {
+          let chunk = parts[i];
+          if (i + 2 < parts.length) chunk += parts[i + 1] + parts[i + 2];
+          frag.append(chunk);
+          if (i + 2 < parts.length) frag.append(document.createElement("br"));
+        }
+        t.replaceWith(frag);
+      });
+    });
+  })();
   document.querySelectorAll("#view .sec-head .num").forEach((el, i) => el.textContent = (i + 1).toFixed(1));
   /* problem map: link ✕ markers with issue rows */
   document.querySelectorAll("#view [data-x]").forEach(el => {
