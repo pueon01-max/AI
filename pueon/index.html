@@ -96,7 +96,10 @@ p{text-wrap:pretty}
 .dl .g{grid-area:g;font:600 12px var(--display);padding:4px 10px;border-radius:99px;background:var(--a-hi);color:#111;align-self:start}
 .dl .a{grid-area:a;color:var(--a-mute);text-decoration:line-through;font-size:15px;margin-top:8px}
 .dl .b{grid-area:b;font:400 clamp(34px,3.6vw,48px)/1 var(--display);letter-spacing:-.04em}
-.todo{display:inline-block;border:1px dashed currentColor;opacity:.7;border-radius:6px;padding:0 8px;font-size:13px}
+.logo-h{display:grid;justify-items:center;gap:clamp(14px,2vw,24px)}
+.logo-h img{width:min(1000px,94%);height:auto;filter:drop-shadow(0 0 40px rgba(255,255,255,.18)) drop-shadow(0 24px 40px rgba(0,0,0,.6))}
+.logo-h .tagline{font:400 clamp(22px,3vw,40px)/1 var(--display);letter-spacing:-.03em;color:var(--a-hi)}
+.foot-logo{height:22px;width:auto;opacity:.85;filter:invert(1) brightness(.2)}
 @media (max-width:860px){.feff{grid-template-columns:1fr 1fr}.delta{grid-template-columns:1fr 1fr}}
 @media (max-width:520px){.feff{grid-template-columns:1fr}}
 </style></head><body>
@@ -573,6 +576,7 @@ const THEMES = {
 const CASES = {
   "pueon": {
     tab: "PueON!",
+    logo: ["img/logo.webp", "PueON!"],
     meta: ["Content · Music Editorial", "PueON!", "Instagram @pueon_808"],
     titleLines: ["Just", "feel it."],
     hero: { kind: "image", src: "img/grid.jpg", alt: "@pueon_808 릴스 그리드 — B2B, Kehlani's Freestyle, EYE ON IT, TBH, Dontcha, Girl, 3 nights, Will u lie?, THAT RIGHT THERE" },
@@ -581,7 +585,7 @@ const CASES = {
     facts: [["Role", "선곡 · 가사 번역 · 한 줄 코멘트 · 영상 편집 · 계정 운영 · 인사이트 분석"],
             ["Period", "운영 중 · 지표 기간 최근 30일 (2026.11.20 확인) · 비교 기준 11.05"],
             ["Team", "1인"],
-            ["Tools", "Instagram 프로페셔널 대시보드 · Claude(인사이트 분석) · 영상 편집 툴 <span class=\"todo\">확인 필요</span>"],
+            ["Tools", "Instagram 프로페셔널 대시보드 · Claude(인사이트 분석)"],
             ["Live", "<a href=\"https://www.instagram.com/pueon_808/\" target=\"_blank\" rel=\"noopener\" style=\"color:inherit\">instagram.com/pueon_808</a>"]],
     fixTitle: "What I chose", fixSub: "흔한 음악 클립과 다르게, 이 계정이 선택한 네 가지.",
     context: {
@@ -711,7 +715,6 @@ const FX = {
             ["bolt", "Reels First", "팔로워에게만 닿는 피드", "95%가 처음 보는 사람에게 닿는 릴스"]] }
 };
 const $ = (s, el = document) => el.querySelector(s);
-const todo = '<span class="todo">확인 필요</span>';
 
 function markHtml(mark) {
   if (!mark) return "";
@@ -796,7 +799,7 @@ function renderCase(key) {
   document.documentElement.style.colorScheme = key === "luckin-campaign" ? "dark" : "light";
   let n = 0; const sec = (label, ch) => `<div class="sec-head lbl"><span class="num">${(++n).toFixed(1)}</span>${ch ? `<span class="ch">${ch}</span>` : ""}<span>${label}</span></div>`;
 
-  const facts = c.facts.map(([k, v]) => `<dt>${k}</dt><dd>${v ?? todo}</dd>`).join("");
+  const facts = c.facts.filter(([, v]) => v != null && v !== "").map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("");
   const hero = c.hero.kind === "cutout"
     ? `<div class="hero-cut"><img src="${c.hero.src}" alt="${c.hero.alt}"></div>`
     : c.hero.kind === "phone"
@@ -890,13 +893,13 @@ function renderCase(key) {
         <div class="pill p"><i>✕</i><span>${p}</span></div><span class="arw" aria-hidden="true">→</span><div class="pill f"><i>✓</i><span>${f}</span></div></div>`).join("")}</div>
     </div></section>` : "";
 
-  const learn = c.reflection.learnings.map(([k, p]) => `<div><span class="lbl">${k}</span><p>${p ?? todo}</p></div>`).join("");
+  const learn = c.reflection.learnings.filter(([, p]) => p != null && p !== "").map(([k, p]) => `<div><span class="lbl">${k}</span><p>${p}</p></div>`).join("");
 
   $("#view").innerHTML = `
   <section class="ra hero${c.hero.kind === "cutout" ? " cut" : ""}"><div class="wrap">
     <div class="meta-row lbl">${c.meta.map(m => `<span>${m}</span>`).join("")}</div>
     ${c.hero.logo ? `<img class="hero-logo" src="${c.hero.logo}" alt="Compose Coffee">` : ""}
-    <h1>${c.titleLines.map(l => `<span>${l}</span>`).join("")}</h1>
+    ${c.logo ? `<h1 class="logo-h"><img src="${c.logo[0]}" alt="${c.logo[1]}"><span class="tagline">${c.titleLines.join(" ")}</span></h1>` : `<h1>${c.titleLines.map(l => `<span>${l}</span>`).join("")}</h1>`}
     <div class="hv">${hero}${fx ? `<div class="chips" aria-hidden="true">${fx.fixes.slice(0, 4).map(([icon, kw], i) => `<span class="fchip c${i}">${ic(icon)}${kw}</span>`).join("")}</div>` : ""}</div>
     <div class="overview"><p class="big">${c.statement}</p>
       <div class="ov-body"><span class="lbl">[Overview]</span><p>${c.overview}</p><dl class="facts">${facts}</dl></div></div>
@@ -913,7 +916,7 @@ function renderCase(key) {
   ${vsHtml(c.versus, sec)}
   <section class="rb room" id="ch-learn" data-ch="LEARN"><div class="wrap">${sec("Process", "LEARN")}<ol class="proc">${proc}</ol></div></section>
   <section class="rb room" style="padding-top:0"><div class="wrap">${sec("Reflection")}<div class="refl"><blockquote>${c.reflection.quote}</blockquote><div class="learn">${learn}</div></div></div></section>
-  <div class="rb"><div class="wrap foot"><span>${c.meta[1]}</span><span>${c.meta[2]}</span></div></div>`;
+  <div class="rb"><div class="wrap foot">${c.logo ? `<img class="foot-logo" src="${c.logo[0]}" alt="${c.logo[1]}">` : `<span>${c.meta[1]}</span>`}<span>${c.meta[2]}</span></div></div>`;
 
   document.querySelectorAll("#view .sec-head .num").forEach((el, i) => el.textContent = (i + 1).toFixed(1));
   /* problem map: link ✕ markers with issue rows */
