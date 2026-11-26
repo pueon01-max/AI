@@ -975,23 +975,34 @@ function renderCase(key) {
   <div class="rb"><div class="wrap foot">${c.logo ? `<img class="foot-logo" src="${c.logo[0]}" alt="${c.logo[1]}">` : `<span>${c.meta[1]}</span>`}<span>${c.meta[2]}</span></div></div>`;
 
 
-  // a Korean sentence ending (…다. / …요. / …”.) followed by a space → line break, in body text only
+  // body text: new line after each sentence (…다. / …요.) and after a clause comma (…고, / …며,)
+  // a comma breaks only when both sides are at least 14 characters, so short lists (기획, 디자인) stay on one line
   (() => {
-    const END = /([가-힣)”’"])([.!?])\s+(?=\S)/g;
+    const RX = /([가-힣)”’"])([.!?])\s+(?=\S)|([가-힣]),\s+(?=\S)/g, MIN = 14;
     document.querySelectorAll("#view p, #view dd, #view figcaption, #view .vs-lead").forEach(el => {
       if (el.closest("h1, h2, h3, blockquote, .src, .vs-src")) return;
       const walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
       const nodes = []; while (walk.nextNode()) nodes.push(walk.currentNode);
       nodes.forEach(t => {
-        if (!END.test(t.data)) return; END.lastIndex = 0;
-        const parts = t.data.split(END); const frag = document.createDocumentFragment();
-        for (let i = 0; i < parts.length; i += 3) {
-          let chunk = parts[i];
-          if (i + 2 < parts.length) chunk += parts[i + 1] + parts[i + 2];
-          frag.append(chunk);
-          if (i + 2 < parts.length) frag.append(document.createElement("br"));
+        const d = t.data; let m, last = 0, start = 0; const cuts = [];
+        RX.lastIndex = 0;
+        while ((m = RX.exec(d))) {
+          const keep = m.index + (m[3] ? 2 : 2);           // keep "다." or "고,"
+          if (m[3]) {
+            // only clause endings break (…고, …며, …서, …지만, …는데, …때문에 …); nouns in a list do not
+            const word = d.slice(0, m.index + 1).split(/\s/).pop();
+            if (!/(고|며|서|만|데|어|아|여|해|듯|라|니|록|뿐|면서|때문에|면서도)$/.test(word)) continue;
+            if (/^(그리고|또는|혹은)/.test(d.slice(RX.lastIndex))) continue;
+            const rest = d.slice(RX.lastIndex), end = rest.search(/[.!?](\s|$)/);
+            const after = end < 0 ? rest.length : end;
+            if (keep - start < MIN || after < MIN) continue;
+          }
+          cuts.push([keep, RX.lastIndex]); start = RX.lastIndex;
         }
-        t.replaceWith(frag);
+        if (!cuts.length) return;
+        const frag = document.createDocumentFragment();
+        cuts.forEach(([k, next]) => { frag.append(d.slice(last, k), document.createElement("br")); last = next; });
+        frag.append(d.slice(last)); t.replaceWith(frag);
       });
     });
   })();
