@@ -925,7 +925,7 @@ function renderCase(key) {
     el.addEventListener("mouseenter", () => on(true)); el.addEventListener("mouseleave", () => on(false));
   });
   /* reveal on scroll + count-up numbers */
-  const rv = document.querySelectorAll("#view .metric, #view .stat, #view .issue, #view .xmap, #view .fx, #view .icard, #view .iscreen, #view .dec-head, #view .panels, #view .why > div, #view .jr li, #view .jx, #view .jw, #view .proc li, #view .learn div, #view .flow li, #view .rf, #view .shift, #view .insight, #view .fxb-t");
+  const rv = document.querySelectorAll("#view .metric, #view .stat, #view .issue, #view .xmap, #view .fx, #view .icard, #view .iscreen, #view .dec-head, #view .panels, #view .why > div, #view .jr li, #view .jx, #view .jw, #view .proc li, #view .learn div, #view .flow li, #view .rf, #view .shift, #view .insight, #view .fxb-t, #view .rv");
   rv.forEach((el, i) => { el.classList.add("rv"); el.style.setProperty("--d", (Array.prototype.indexOf.call(el.parentElement.children, el) % 6) * 70 + "ms"); });
   const count = el => {
     if (el.dataset.done) return; el.dataset.done = 1;
