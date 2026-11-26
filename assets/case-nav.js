@@ -5,7 +5,8 @@
     ["spoany", "01 Spoany Studio", "spoany"],
     ["matter-lab", "02 Matter Lab", "matter"],
     ["luckin", "03 Luckin Campaign", "luckin-campaign"],
-    ["pueon", "04 PueON!", "pueon"]
+    ["pueon", "04 PueON!", "pueon"],
+    ["abib", "05 Abib Pop-up", "abib"]
   ];
   var here = location.pathname.split("/").filter(Boolean);
   var cur = "";
